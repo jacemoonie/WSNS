@@ -28,10 +28,11 @@ $loadFromPosts = new Posts;
 // $postsControl = new PostsControls;
 $loadFromProfile = new Profile;
 $loadFromFriend = new Friend;
+$loadFromMessage = new Message;
 
-
-require_once(__ROOT__.'\backend\shared\header.php');
 require_once(__ROOT__.'\backend\shared\functions.php'); 
+require_once(__ROOT__.'\backend\shared\header.php');
+
 
 
 

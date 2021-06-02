@@ -1,36 +1,14 @@
-<?php $pageTitle="Notification | WeLink";
- Include_once 'backend\initialize.php'; 
+<?php $pageTitle="Messages | WeLink";
+include_once 'backend\shared\main_header_functionality.php';
 
-$user_id = $_SESSION['userLoggedIn'];
-$status = $verify->getVerifyStatus("status",$user_id);
-
-//check if user is logged in
-if(isset($_SESSION['userLoggedIn']) && $status->status === "1"){
-    $user_id = $_SESSION['userLoggedIn'];
-    
-}else if(Login::isLoggedIn()){
-    $user_id = Login::isLoggedIn();
+if(!isset($_GET['message'])){
+    $otheruserid = "";
 }else{
-    redirect_to(url_for("index"));
+    $otheruserid = h($_GET['message']);
+    $otheruserData = $loadFromUser->userData($otheruserid);
 }
-
-if(is_get_request()){
-
-    if(isset($_GET['username']) && !empty($_GET['username'])){
-      $username = FormSanitizer::formSanitizerString($_GET['username']);
-      $profileID = $loadFromUser->userIdByUsername($username);
-      if(!$profileID){
-          redirect_to(url_for("home")); 
-      }else{
-          $profileId = $profileID;
-      }
-    }else{
-        $profileId = $user_id;
-    }
-}
-
-$user = $loadFromUser->userData($user_id);
 ?>
+<div class="u-p-id" data-uid="<?php echo $user_id ?>"></div>
 <div class="container-fluid homepage">
     <div class="homepage-section row">
         <?php include 'backend\shared\nav-bar.php';?>
@@ -38,30 +16,16 @@ $user = $loadFromUser->userData($user_id);
            <div class="message-section container">
                <div class="message-header container">
                    <h2 class="">Messages</h2>
-                   <a href="<?php echo url_for("messages/compose") ?>" class="n-msg " role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#newMessageModal"><img height="20px" width="20px" src="frontend\assets\images\plus-sign.png" alt="" class=""></a>
+                   <a href="<?php echo url_for("messages/compose") ?>" class="n-msg " role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#newMessageModal"><img height="20px" width="20px" src="<?php echo url_for('frontend\assets\images\plus-sign.png');?>" alt="" class=""></a>
                </div>
-                <div class="messages-list">
-                    <div class="message">
-                        <div class="user-photo col-3">
-                            <img src="frontend\assets\images\defaultPic.svg" alt="" class="">
-                        </div>
-                        <div class="user-name-details col-2">
-                            <span class="name">Name</span>
-                            <span class="username">@Username</span>
-                            <div class="messages">
-                                <article class="message">
-                                    This is the message.
-                                </article>
-                            </div>
-                        </div>
-                        <div class="message-date col-2">
-                            May 29, 2021
-                        </div>
-                    </div>
+                <div class="messages-list-container">
+                    <ul class="msg-user-add">
+                    </ul>
                 </div>
            </div>
         </div>
         <div class="right-section right-msg col-sm-5">
+            <?php if(!isset($_GET['message'])):?>
             <div class="no-msg-container">
                 <div class="n-msg-wrapper">
                     <h2 class="">You don't have a message selected</h2>
@@ -70,7 +34,27 @@ $user = $loadFromUser->userData($user_id);
                     <?php include 'backend\modal\messageModal.php' ?>
                 </div>
             </div>
+            <?php endif;?>
         </div>
     </div>
 </div>
+<script>
+    $uid = $(".u-p-id").data("uid")
+    $(document).ready(function(){
+        $(document).on("click",".msg-user-name-wrap",function(){
+            var otheruserid = $(this).data("profileid");
+            if(otheruserid !="" && otheruserid != undefined){
+                window.location.href = "http://localhost/WSNS/messages/"+otheruserid;
+            }
+            
+        })
+        function userLoadRecentMessage(){
+            var otheruserid = '<?php echo $otheruserid ;?>';
+            $.post("http://localhost/WSNS/backend/ajax/fetchMessage.php",{loadUserid:$uid,otheruserid:otheruserid},function(data){
+                $('ul.msg-user-add').html(data);
+            })
+        }
+        userLoadRecentMessage();
+    })
+</script>
 <?php include 'backend\loadJsFiles.php'; ?>

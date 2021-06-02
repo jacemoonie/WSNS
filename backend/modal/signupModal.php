@@ -3,7 +3,7 @@
 <!-- Signup Modal -->
 <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content signup">
         <div class="modal-header">
             <div class="modal-icon">
                 <img src="frontend\assets\images\link-icon.svg" alt="" class="signup-modal-icon">

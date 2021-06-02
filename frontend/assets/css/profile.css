@@ -1,0 +1,33 @@
+/* Profile style */
+.profile-icon img {
+    display: inline-block;
+    height: 20px;
+  }
+  .friend-info-icon.col-2 span {
+  cursor: pointer;
+  }
+  .home-feed-container.row {
+  border-top: .1rem solid #f3f5f6;
+  }
+  .profile-user-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  }
+  .description svg {
+  height: 20px;
+  }
+  /* Edit profile */
+  #profilePic {
+    height: 100px;
+    width: 100px;
+  }
+  .profile-pic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-pic img {
+    border-radius: 100px;
+  }
+  

@@ -11,7 +11,7 @@ if(is_post_request()){
         $lastid = $loadFromUser->create("post",array("status"=>$statusText,"postBy"=>$userid));
 
         //Display post
-        echo $loadFromPosts->posts($userid,10);
+        echo  $loadFromPosts->allPosts($userid,10);
     }
 }
 

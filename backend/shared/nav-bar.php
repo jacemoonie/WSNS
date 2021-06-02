@@ -2,13 +2,13 @@
             <div class="nav-bar container row">
                 <div class="nav-bar-content col-sm">
                     <div class="nav-bar-icon row ">
-                        <img src="frontend\assets\images\link-icon.svg" alt="" class="">
+                        <img src="<?php echo url_for('frontend\assets\images\link-icon.svg');?>" alt="" class="">
                     </div>
                     <div class="nav-bar row">
                         <div class="sidenav">
                             <a href="<?php echo url_for('home');?>">
                                 <span class="nav-icon">
-                                    <img src="frontend\assets\images\activeHome.svg" alt="" class="">
+                                    <img src="<?php echo url_for('frontend\assets\images\activeHome.svg');?>" alt="" class="">
                                 </span>
                                 <span class="nav-title">
                                 Home
@@ -16,7 +16,7 @@
                             </a>
                             <a href="<?php echo url_for('notification');?>">
                                 <span class="nav-icon">
-                                    <img src="frontend\assets\images\activeNotification.svg" alt="" class="">
+                                    <img src="<?php echo url_for('frontend\assets\images\activeNotification.svg');?>" alt="" class="">
                                 </span>
                                 <span class="nav-title">
                                 Notification
@@ -24,7 +24,7 @@
                             </a>
                             <a href="<?php echo url_for('messages');?>">
                                 <span class="nav-icon">
-                                    <img src="frontend\assets\images\messageIcon.svg" alt="" class="">
+                                    <img src="<?php echo url_for('frontend\assets\images\messageIcon.svg');?>" alt="" class="">
                                 </span>
                                 <span class="nav-title">
                                 Messages
@@ -32,7 +32,7 @@
                             </a>
                             <a href="<?php echo url_for('group');?>">
                                 <span class="nav-icon">
-                                    <img src="frontend\assets\images\group-icon.png" alt="" class="">
+                                    <img src="<?php echo url_for('frontend\assets\images\group-icon.png');?>" alt="" class="">
                                 </span>
                                 <span class="nav-title">
                                 Group
@@ -40,7 +40,7 @@
                             </a>
                             <a href="<?php echo url_for('events');?>">
                                 <span class="nav-icon">
-                                    <img src="frontend\assets\images\calendar.png" alt="" class="">
+                                    <img src="<?php echo url_for('frontend\assets\images\calendar.png');?>" alt="" class="">
                                 </span>
                                 <span class="nav-title">
                                 Events
@@ -48,7 +48,7 @@
                             </a>
                             <a href="<?php echo url_for('friend');?>">
                                 <span class="nav-icon">
-                                    <img src="frontend\assets\images\friend.png" alt="" class="">
+                                    <img src="<?php echo url_for('frontend\assets\images\friend.png');?>" alt="" class="">
                                 </span>
                                 <span class="nav-title">
                                 Friend
@@ -56,7 +56,7 @@
                             </a>
                             <a href="<?php echo url_for('profile');?>">
                                 <span class="nav-icon">
-                                    <img src="frontend\assets\images\profileIcon.png" alt="" class="">
+                                    <img src="<?php echo url_for('frontend\assets\images\profileIcon.png');?>" alt="" class="">
                                 </span>
                                 <span class="nav-title">
                                 Profile
@@ -64,7 +64,7 @@
                             </a>
                             <a href="<?php echo url_for('logout');?>">
                                 <span class="nav-icon">
-                                    <img src="frontend\assets\images\logout.png" alt="" class="">
+                                    <img src="<?php echo url_for('frontend\assets\images\logout.png');?>" alt="" class="">
                                 </span>
                                 <span class="nav-title">
                                 Log out

@@ -1,0 +1,19 @@
+/* Group Style */
+.group-edit-btn img {
+    height: 20px;
+  }
+  .group-edit-btn img {
+    height: 20px;
+  }
+  .group-edit-btn {
+    display: flex;
+    align-items: baseline;
+    flex: 1;
+  }
+  .group-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+  .group-description article {
+    font-size: 1.3rem;
+  }

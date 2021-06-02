@@ -1,0 +1,57 @@
+/* Notification style */
+.noti-header.row h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+  .noti-header.row {
+    display: flex;
+    flex-direction: row-reverse;
+    border-bottom: .1rem solid #f4f6f7;
+  }
+  .noti-header.row img {
+    height: 26px;
+    width: 39px;
+  }
+  .notification-setting-icon:hover {
+    background-color: #5f91f2;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .noti-logo.col-1 img {
+    height: 50px;
+    width: 50px;
+  }
+  .noti-post {
+    display: flex;
+    padding: 20px;
+  }
+  .notification-content-container {
+    border-bottom: .1rem solid #f3f5f6;
+  }
+  .noti-messsage.col-3 {
+    margin-left: 20px;
+  }
+  .noti-messsage.col-3 p {
+    font-size: 1.5rem;
+    width: 600px;
+  }
+  .noti-feed-content {
+    padding: 0;
+  }
+  .notification-container:hover {
+   transition: background-color 0.5s;
+  }
+  .notification-container:hover {
+    background-color: #d0defb;
+  }
+  
+  .user-friend-request-btn {
+  
+     
+      margin-left: 80px;
+  
+  }
+  

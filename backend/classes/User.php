@@ -22,6 +22,20 @@ class User{
         }
     }
 
+    //SEARCH USER
+    public function search($search){
+        $stmt=$this->pdo->prepare("SELECT `user_id` FROM `users` WHERE `username` LIKE ? OR `firstName` LIKE ? OR `lastName` LIKE ?");
+        $stmt->bindValue(1,$search.'%',PDO::PARAM_STR);
+        $stmt->bindValue(2,$search.'%',PDO::PARAM_STR);
+        $stmt->bindValue(3,$search.'%',PDO::PARAM_STR);
+        $stmt->execute();
+        // echo "<pre>";
+        // $stmt->debugDumpParams();
+        // echo "<pre>";
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        
+    }
+
     public function create($table, array $data)
     {
 
