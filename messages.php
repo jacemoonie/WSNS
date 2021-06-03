@@ -60,39 +60,10 @@ if(!isset($_GET['message'])){
                                  <div class="user-info" data-userid="<?php echo $user_id ;?>" data-otherid="<?php echo $otheruserData->user_id;?>"></div>
                                  <div class="empty-space">
                                      <div class="msg-box">
-                                         <div class="past-data-count">
-                                             <div class="right-sender-msg">
-                                                <div class="right-sender-text-time">
-                                                     <div class="right-sender-text-wrapper">
-                                                         <div class="s-text">
-                                                             <div class="s-msg-text">
-                                                                 Message here.
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                     <div class="sender-time">1h</div>
-                                                 </div>
-                                             </div>
-                                             <div class="left-receiver-msg">
-                                                <a href="<?php echo $otheruserData->username;?>" class="receive-msg">
-                                                    <img width="20px" height="20px" src="<?php echo url_for($otheruserData->profileImage) ;?>" alt="<?php echo $otheruserData->firstName.' '.$otheruserData->lastName; ?>" class="">
-                                                </a>
-                                                <div class="left-receive-text-time">
-                                                    <div class="left-receiver-text-wrapper">
-                                                         <div class="r-text">
-                                                             <div class="r-msg-text">
-                                                                 Message here.
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                     <div class="sender-time">1h</div>
-                                                </div>  
-                                             </div>
-                                         </div>
-                                     </div>
+                                     <!-- MESSAGE HERE -->
+                                    </div>
                                  </div>
-                             </div>
-                         </div>
+                            </div>
                          <aside class="chat-footer" aria-label="Start a new message" role="complementary">
                             <textarea name="messageInput" id="sendMsgBtn" placeholder="Start a new message" aria-label="Start a new message" class=""></textarea>
                             <button role="button" class="msg-send-btn"id="sendMsgBtn">
@@ -122,6 +93,12 @@ if(!isset($_GET['message'])){
                 $('ul.msg-user-add').html(data);
             })
         }
+
+        var otherpersonid = '<?php if(!empty($otheruserid)){ echo $otheruserid;}?>';
+        $.post("http://localhost/WSNS/backend/ajax/fetchMessage.php",{userId:$uid,otherpersonid:otherpersonid},function(data){
+                $('.msg-box').html(data);
+                // alert(data);
+            })
         userLoadRecentMessage();
     })
 </script>

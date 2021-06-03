@@ -9,7 +9,7 @@ $(function(){
     win.scroll(function(){
         let content_height = $(document).height();
         let content_y = win.height()+win.scrollTop();
-        console.log(content_y + "/"+content_height);
+        // console.log(content_y + "/"+content_height);
 
         if(content_y >= content_height-1){
             offset += 10;

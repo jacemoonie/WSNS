@@ -16,4 +16,12 @@ class Message{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function messageData($userId,$otherid){
+        $stmt = $this->pdo->prepare("SELECT * FROM `messages` LEFT JOIN `users` ON `messageFrom`=`user_id` WHERE (`messageTo`=:userID AND `messageFrom`=:otherpersonid) OR (`messageTo`=:otherpersonid AND `messageFrom`=:userID) ORDER BY `messageOn` ASC");
+        $stmt->bindParam(":userID",$userId,PDO::PARAM_INT);
+        $stmt->bindParam(":otherpersonid",$otherid,PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 }

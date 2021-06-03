@@ -2,6 +2,7 @@
 require_once '../initialize.php';
 
 if(is_post_request()){
+    //FETCH RECENT MESSAGES
     if(isset($_POST['loadUserid']) && !empty($_POST['loadUserid'])){
         $userid = h($_POST['loadUserid']);
         $otherid = h($_POST['otheruserid']);
@@ -35,6 +36,56 @@ if(is_post_request()){
             </li>';
         }
     }
+
+    //FETCH CHAT MESSAGES
+    if(isset($_POST['otherpersonid']) && !empty($_POST['otherpersonid'])){
+        $userid = h($_POST['userId']);
+        $otherid = h($_POST['otherpersonid']);
+    
+        $messageData = $loadFromMessage->messageData($userid,$otherid);
+        if(!empty($messageData)){
+            echo '<div class="past-data-count" data-count="'.count($messageData).'"></div>';
+            foreach($messageData as $message){
+                if($message->messageFrom == $userid){
+                    echo '
+                    <div class="right-sender-msg">
+                        <div class="right-sender-text-time">
+                            <div class="right-sender-text-wrapper">
+                                <div class="s-text">
+                                    <div class="s-msg-text">
+                                       '.$message->message.'
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sender-time">'.$loadFromUser->timeAgo($message->message).'</div>
+                        </div>
+                    </div>';
+                }else{
+                    echo '
+                    <div class="left-receiver-msg">
+                        <a href="'.url_for($message->username).'" class="receive-msg">
+                            <img src="'.url_for($message->profileImage).'" alt="'.$message->firstName.' '.$message->lastName.'" class="">
+                        </a>
+                        <div class="left-receive-text-time">
+                            <div class="left-receiver-text-wrapper">
+                                    <div class="r-text">
+                                        <div class="r-msg-text">
+                                        '.$message->message.'
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sender-time">'.$loadFromUser->timeAgo($message->message).'</div>
+                            </div>  
+                        </div>
+                    </div>';
+                }
+            }
+        }
+    }
 }
+    
+         
+    
+
 
 ?>
