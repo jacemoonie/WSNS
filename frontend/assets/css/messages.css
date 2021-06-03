@@ -95,9 +95,7 @@
     border-top: .1rem solid #f3f5f6;
     transition: background-color 0.5s;
   }
-  .messages-list:hover {
-    background-color: #d0defb;
-  }
+
   .n-msg-wrapper {
     padding-left: 25%;
   }
@@ -261,7 +259,7 @@ span.user-text{
 .msg-previ{
   text-overflow: ellipsis;
 }
-.msg-user-add:hover{
+.msg-user-name-wrapper:hover{
   background-color: #d0defb;
 }
 .msg-user-name-wrapper {
@@ -392,6 +390,7 @@ textarea#sendMsgBtn {
 .s-msg-text{
   line-height: 1.5;
   overflow-wrap: break-word ;
+  font-size: 1.5rem;
 }
 .sender-time{
   margin: 0;
@@ -457,4 +456,5 @@ a.receive-msg {
 .r-msg-text{
   overflow-wrap: break-word;
   line-height: 1.5;
+  font-size: 1.5rem;
 }

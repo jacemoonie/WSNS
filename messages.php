@@ -77,6 +77,7 @@ if(!isset($_GET['message'])){
         </div>
     </div>
 </div>
+<?php include 'backend\loadJsFiles.php'; ?>
 <script>
     $uid = $(".u-p-id").data("uid")
     $(document).ready(function(){
@@ -100,6 +101,7 @@ if(!isset($_GET['message'])){
                 $('.msg-box').html(data);
                 // alert(data);
             })
+            
         userLoadRecentMessage();
 
         //FOR SENDING MESSAGES
@@ -155,7 +157,24 @@ if(!isset($_GET['message'])){
             })
         }, 500);
 
+        function loadMessage(){
+            $.ajax({
+                    type:"POST",
+                    url:"http://localhost/WSNS/backend/ajax/sendMessage.php",
+                    data:{
+                        yourId:userid,
+                        showMsg:otherid
+                    },
+                    success:function(data){
+                      
+                        userLoadRecentMessage();
+                        $('.msg-box').html(data);
+                    }
+                })
+        }
         
+        var loadTimer = setInterval(() => {
+            loadMessage();
+        }, 1000);
     })
 </script>
-<?php include 'backend\loadJsFiles.php'; ?>
