@@ -29,6 +29,8 @@ $(function(){
             window.location.href = "http://localhost/WSNS/messages/"+profileId;
         }
     })
+
+    
     
    
 })

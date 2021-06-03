@@ -87,6 +87,7 @@ if(!isset($_GET['message'])){
             }
             
         })
+        //LOAD RECENT CHAT
         function userLoadRecentMessage(){
             var otheruserid = '<?php echo $otheruserid ;?>';
             $.post("http://localhost/WSNS/backend/ajax/fetchMessage.php",{loadUserid:$uid,otheruserid:otheruserid},function(data){
@@ -100,6 +101,61 @@ if(!isset($_GET['message'])){
                 // alert(data);
             })
         userLoadRecentMessage();
+
+        //FOR SENDING MESSAGES
+        var userid = $(".user-info").data("userid");
+        var otherid = $(".user-info").data("otherid");
+        var userIdForAjax,otherIdForAjax;
+        function xyz(name,surname,callback){
+            if(typeof callback == 'function'){
+                callback(name,surname);
+            }else{
+                alert('Argument is not function type');
+            }
+        }
+
+        function abc(var1,var2){
+            if(var1==undefined || var2==undefined){
+                return userIdForAjax=userid,otherIdForAjax=otherid;
+            }else{
+                return userIdForAjax=var1,otherIdForAjax=var2;
+            }
+        }
+
+        setTimeout(function(){
+            $(document).on("keyup","#sendMsgBtn",function(e){
+            var thisEl = $(this);
+            var rawMsg = $(this).val();
+            if(rawMsg !=""){
+                //USER enter ENTER key
+                if(e.which == 13 || e.keycode == 13){
+                    if(userIdForAjax == undefined){
+                        xyz(userIdForAjax,otherIdForAjax,abc);
+                    }
+                    //    console.log(rawMsg,userIdForAjax,otherIdForAjax)
+                        $.ajax({
+                            type:"POST",
+                            url:"http://localhost/WSNS/backend/ajax/sendMessage.php",
+                            data:{
+                                userIdForAjax:userIdForAjax,
+                                otherIdForAjax:otherIdForAjax,
+                                msg:rawMsg
+                            },
+                            success:function(data){
+                                // alert(data);
+                                $(thisEl).val("");
+                                userLoadRecentMessage();
+                                $('.msg-box').html(data);
+                            }
+                        })
+                        
+                }
+            }
+
+            })
+        }, 500);
+
+        
     })
 </script>
 <?php include 'backend\loadJsFiles.php'; ?>
