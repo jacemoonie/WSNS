@@ -47,8 +47,7 @@
     border-bottom: .1rem solid #edf0f1;
   }
   .post-container-text textarea {
-    width: 400px;
-    height: 100px;
+    width: 300px;
     font-size: 1.5rem;
   }
   .filter-tab {

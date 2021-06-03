@@ -17,8 +17,7 @@
                 </div>
             </div>
             <div class="s-wrapper-user-container">
-                <ul class="s-result-user">
-                    
+                <ul class="s-result-user" style="overflow-y:auto,height:90%;"> 
                 </ul>
             </div>
         </form>
