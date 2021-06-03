@@ -17,3 +17,20 @@
   .group-description article {
     font-size: 1.3rem;
   }
+  input.s-member {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    border: none;
+    width: 100%;
+  }
+  
+  .addMember{
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(15,20,15);
+    border-bottom: .1rem solid rgb(235.238,240);
+    cursor: pointer;
+}

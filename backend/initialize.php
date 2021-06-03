@@ -29,6 +29,7 @@ $loadFromPosts = new Posts;
 $loadFromProfile = new Profile;
 $loadFromFriend = new Friend;
 $loadFromMessage = new Message;
+$loadFromGroup = new Group;
 
 require_once(__ROOT__.'\backend\shared\functions.php'); 
 require_once(__ROOT__.'\backend\shared\header.php');
