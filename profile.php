@@ -1,44 +1,39 @@
 <?php 
 $pageTitle="Profile | WeLink";
 Include_once 'backend\initialize.php'; 
-$user_id = $_SESSION['userLoggedIn'];
-$status = $verify->getVerifyStatus("status",$user_id);
+Include_once 'backend\shared\header.php';  
+include 'backend\shared\editProfile_handlers.php'; 
+include 'backend\shared\friend_handlers.php'; 
+
 
 //check if user is logged in
-if(isset($_SESSION['userLoggedIn']) && $status->status === "1"){
+if(isset($_SESSION['userLoggedIn'])){
+
     $user_id = $_SESSION['userLoggedIn'];
+    $profileId = $_SESSION['userLoggedIn'];
+    $user = $loadFromUser->userData($user_id);
+    $profileData = $loadFromUser->userData($profileId); 
+
+    if(is_get_request()){
+
+        if(isset($_GET['username']) && !empty($_GET['username'])){
+          $username = FormSanitizer::formSanitizerString($_GET['username']);
+          $profileID = $loadFromUser->userIdByUsername($username);
+          if(!$profileID){
+              redirect_to(url_for("home")); 
+          }else{
+              $profileId = $profileID;
+              $profileData = $loadFromUser->userData($profileId); 
+          }
+        }
+            
+    }
     
-}else if(Login::isLoggedIn()){
-    $user_id = Login::isLoggedIn();
 }else{
     redirect_to(url_for("index"));
 }
 
-if(is_get_request()){
-
-    if(isset($_GET['username']) && !empty($_GET['username'])){
-      $username = FormSanitizer::formSanitizerString($_GET['username']);
-      $profileID = $loadFromUser->userIdByUsername($username);
-      if(!$profileID){
-          redirect_to(url_for("home")); 
-      }else{
-          $profileId = $profileID;
-      }
-    }else{
-        $profileId = $user_id;
-    }
-
-    //Friend
-    include 'backend\shared\friend_handlers.php';
-}
-
-include 'backend\shared\editProfile_handlers.php'; 
-
-$user = $loadFromUser->userData($user_id);
-$profileData = $loadFromUser->userData($profileId);
-$date_joined = strtotime($profileData->signUpDate);
-
-//FRIEND
+$date_joined = strtotime($profileData->signUpDate); 
 
 // CHECK FRIENDS
 $is_already_friends = $loadFromFriend->is_already_friends($_SESSION['userLoggedIn'], $profileData->user_id);
@@ -108,7 +103,7 @@ document.title = "'.$pageTitle.'";
                                     <a href="<?php echo h($_SERVER['PHP_SELF']).'?action=send_req&id='.$profileData->user_id.''?>" class="req_actionBtn Button sendRequest">Send Request</a>
                                <?php }
                             }else{ ?>
-                               <button type="button" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>;
+                               <button type="button" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
                            <?php } ?>
                         </div>
                         <?php include 'backend\modal\setupProfileModal.php'; ?>
@@ -135,6 +130,6 @@ document.title = "'.$pageTitle.'";
         <?php include 'backend\shared\right-section.php'; ?>
     </div>
 </div>
-
+<script src="<?php echo url_for('frontend\assets\js\delete.js'); ?>"></script>
 <?php include 'backend\loadJsFiles.php'; ?>
 

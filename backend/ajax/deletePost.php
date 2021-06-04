@@ -12,7 +12,6 @@ if(is_post_request()){
             $loadFromUser->delete("post",["postBy"=>$userId,"postID"=>$postID]);
         }   
 
-        // echo $loadFromPosts->posts($userId,10);
     }
         
     

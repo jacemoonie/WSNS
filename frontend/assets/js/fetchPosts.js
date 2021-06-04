@@ -26,6 +26,12 @@ $(function(){
                     $(".postContainer").html(data);
                 })
             }
+
+            if(window.location.href ==="http://localhost/WSNS/dashboard"){
+                $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPostsAdmin:offset},function(data){   
+                    $(".postContainer").html(data);
+                })
+            }
         }
            
     })

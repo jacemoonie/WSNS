@@ -1,107 +1,33 @@
 <?php
 
-class Account{
+class Admin{
     private $pdo;
     private $user;
-    private $admin;
     private $errorArray=array();
 
     //connect database
     public function __construct(){
         $this->pdo = Database::instance();
         $this->user = new User;
-        $this->admin = new Admin;
     }
 
-    //register user
-    public function register($fn,$ln,$un,$em,$pw,$pw2){
-        $this->validateFirstName($fn);
-        $this->validateLastName($ln);
-        $this->validateEmail($em);
-        $this->validatePassword($pw,$pw2);
-        if(empty($this->errorArray)){
-            return $this->insertUserDetails($fn,$ln,$un,$em,$pw);
-        }
-        else{
-            return false;
-        }
-    }
-
-      //update profile
-    public function updateProfile($uid,$fn,$ln,$un,$em,$npw,$npw2,$linkImage){
-        $this->validateFirstName($fn);
-        $this->validateLastName($ln);
-        $user = $this->user->userData($uid);
-        if($user->email !== $em)
-        {
-            $this->validateEmail($em);
-        }
-        if(!empty($npw) && !empty($npw2)){
-
-            $this->validatePassword($npw,$npw2);
-        }
-        if(empty($this->errorArray)){
-            
-            return $this->updateUserDetails($uid,$fn,$ln,$un,$em,$npw,$linkImage);
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function updateAdminProfile($uid,$fn,$ln,$un,$em,$npw,$npw2,$linkImage){
-        $this->validateFirstName($fn);
-        $this->validateLastName($ln);
-        $user = $this->admin->adminData($uid);
-        if($user->email !== $em)
-        {
-            $this->validateAdminEmail($em);
-        }
-        if(!empty($npw) && !empty($npw2)){
-
-            $this->validatePassword($npw,$npw2);
-        }
-        if(empty($this->errorArray)){
-            
-            return $this->updateAdminDetails($uid,$fn,$ln,$un,$em,$npw,$linkImage);
-        }
-        else{
-            return false;
-        }
-    }
-    
-    //login user
-    public function login($username,$pass){
-    
-        //check username
-        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username =:un OR email =:un');
-        $stmt->bindParam(":un",$username,PDO::PARAM_STR);
-        
-        if(!$stmt->execute()) {
-            throw new ErrorException('Could not execute query');
-        }
-        
-        $count = $stmt->rowCount();
-        if($count != 0){
-            $user = $stmt->fetch(PDO::FETCH_OBJ);
-            $pass_hash = $user->password;
-            //compare pass
-            if(password_verify($pass,$pass_hash)){
-                return $user->user_id;
-            }else{
-                array_push($this->errorArray,Constants::$loginPasswordWrong);
-                return false;
-            }
-            
+    public function adminData($admin_id){
+        $stmt=$this->pdo->prepare("SELECT * FROM `admin` WHERE admin_id=:adminId");
+        $stmt->bindParam(":adminId",$admin_id,PDO::PARAM_INT);
+        $stmt->execute();
+        // echo "<pre>";
+        // $stmt->debugDumpParams();
+        // echo "<pre>";
+        $user= $stmt->fetch(PDO::FETCH_OBJ);
+        if($stmt->rowCount() !=0){
+            return $user;
         }else{
-            array_push($this->errorArray,Constants::$loginUsernameEmailWrong);
-                return false;
+            return false;
         }
-        
     }
 
-    //login user
-    public function adminLogin($username,$pass){
+     //login admin
+     public function login($username,$pass){
     
         //check username
         $stmt = $this->pdo->prepare('SELECT * FROM `admin` WHERE username =:un OR email =:un');
@@ -128,6 +54,135 @@ class Account{
                 return false;
         }
         
+    }
+
+    public function recentPosts($num){
+        $stmt = $this->pdo->prepare("SELECT * FROM `post` , `users` WHERE `postBy`=`user_id` ORDER BY postedOn DESC LIMIT :num");
+        $stmt->bindParam(":num",$num,PDO::PARAM_INT);
+        $stmt->execute();
+        $posts = $stmt->fetchAll(PDO::FETCH_OBJ);
+        foreach($posts as $post){
+            // $postControls = new PostsControls;
+            // $controls = $postControls->createControls($post->postID,$post->postBy,$user_id);
+            echo'<article role="article" data-focusable="true" tabIndex="0" class="post">
+            <div class="feed-post-container row">
+                           <div class="post-content-container">
+                               <div class="user-pic">
+                                   <img src="'.url_for($post->profileImage).'" alt="" class="">
+                               </div>
+                               <div class="user-profile-details">
+                                   <span class="name"><a href="'.url_for($post->username).'">'.$post->firstName.' '.$post->lastName.'</a></span>
+                                   <span class="username">@'.$post->username.'</span>
+                                   <span class="date">'.$this->user->timeAgo($post->postedOn).'</span>
+                               </div>
+                           </div>
+                           <div class="user-post row">
+                               <article>'.$post->status.'</article>
+                           </div>
+                       </div>
+            </article> ';
+        }
+        
+    }
+
+    public function sitesViewCounter(){
+        //check username
+        $stmt = $this->pdo->prepare('SELECT * FROM `views`');
+        
+        if(!$stmt->execute()) {
+            throw new ErrorException('Could not execute query');
+        }
+        $views = $stmt->fetch(PDO::FETCH_OBJ);
+        $count = $views->views_count;
+        if($count != 0){
+            return $count;
+            
+        }else{
+            return $count = 0;
+        }
+    }
+    public function updateViews()
+    {
+
+        $sql = "UPDATE `views` SET views_count=views_count+1 WHERE views_id= 1 ";
+        $stmt = $this->pdo->prepare($sql);
+        if(!$stmt->execute()) {
+            throw new ErrorException('Could not execute query');
+        }
+    
+    }
+
+    //register admin
+    public function register($fn,$ln,$un,$em,$pw,$pw2){
+        $this->validateFirstName($fn);
+        $this->validateLastName($ln);
+        $this->validateEmail($em);
+        $this->validatePassword($pw,$pw2);
+        if(empty($this->errorArray)){
+            return $this->insertUserDetails($fn,$ln,$un,$em,$pw);
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function update($tableName,$user_id, array $fields)
+    {
+
+        /*
+        * Check for input errors.
+        */
+        if(empty($fields)) {
+            throw new InvalidArgumentException('Cannot insert an empty array.');
+        }
+        if(!is_string($tableName)) {
+            throw new InvalidArgumentException('Table name must be a string.');
+        }
+
+
+        $columns="";
+        $i=1;
+        foreach($fields as $name => &$value){
+            $columns .= "{$name} = :{$name}";
+            if($i < count($fields)){
+                $columns .= " , ";
+            }
+            $i++;
+        }
+        // $sql = 'SELECT * FROM verification WHERE code = :code';
+        $sql = "UPDATE {$tableName} SET {$columns} WHERE admin_id={$user_id} ";
+        // $sql = "SELECT {$columnName} FROM {$tableName} WHERE {$columns}";
+
+
+        // var_dump($sql);
+
+        // Prepare new statement
+        $stmt = $this->pdo->prepare($sql);
+
+        /*
+        * Bind parameters into the query.
+        *
+        * We need to pass the value by reference as the PDO::bindParam method uses
+        * that same reference.
+        */
+        foreach($fields as $key => &$value) {
+
+            // Prefix the placeholder with the identifier
+            $key = ':' . $key;
+
+            // Bind the parameter.
+            $stmt->bindValue($key, $value);
+
+        }
+
+        /*
+        * Check if the query was executed. This does not check if any data was actually
+        * inserted as MySQL can be set to discard errors silently.
+        */
+        if(!$stmt->execute()) {
+            throw new ErrorException('Could not execute query');
+        }
+    
     }
 
     private function validateFirstName($fn){
@@ -219,21 +274,6 @@ class Account{
         }
     }
 
-    private function validateAdminEmail($em){
-        $stmt=$this->pdo->prepare("SELECT email FROM `admin` WHERE email=:email");
-        $stmt->bindParam(":email",$em,PDO::PARAM_STR);
-        $stmt->execute();
-        if($stmt->rowCount() !=0){
-            array_push($this->errorArray,Constants::$emailTaken);
-            return;
-        }
-
-        if(!filter_var($em,FILTER_VALIDATE_EMAIL)){
-            array_push($this->errorArray,Constants::$emailInvalid);
-            return;
-        }
-    }
-
     private function insertUserDetails($fn,$ln,$un,$em,$pw){
         $pass_hash=password_hash($pw,PASSWORD_BCRYPT);
         $rand=rand(0,2);
@@ -280,32 +320,8 @@ class Account{
             $stmt = $this->user->update("users",$uid,["password" =>$npw]);
         }
         if(!empty($linkImage)){
-            $stmt = $this->user->update("users",$uid,["profileImage" =>$linkImage]);
-        }
-
-        return true;
-    }
-
-    private function updateAdminDetails($uid,$fn,$ln,$un,$em,$pw,$linkImage){
-        
-        if(!empty($fn)){
-            $stmt = $this->admin->update("admin",$uid,["firstName" =>$fn]);
-        }
-        if(!empty($ln)){
-            $stmt = $this->admin->update("admin",$uid,["lastName" =>$ln]);
-        }
-        if(!empty($un)){
-            $stmt = $this->admin->update("admin",$uid,["username" =>$un]);
-        }
-        if(!empty($em)){
-            $stmt = $this->admin->update("admin",$uid,["email" =>$em]);
-        }
-        if(!empty($pw)){
             $npw = password_hash($pw,PASSWORD_BCRYPT);
-            $stmt = $this->admin->update("admin",$uid,["password" =>$npw]);
-        }
-        if(!empty($linkImage)){
-            $stmt = $this->admin->update("admin",$uid,["profileImage" =>$linkImage]);
+            $stmt = $this->user->update("users",$uid,["profileImage" =>$linkImage]);
         }
 
         return true;

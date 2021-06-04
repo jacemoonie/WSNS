@@ -1,6 +1,7 @@
 <?php 
 $pageTitle="Verify your Account";
 Include_once 'backend\initialize.php'; 
+Include_once 'backend\shared\header.php'; 
 Include 'backend\shared\verify_handlers.php';
 
 ?>

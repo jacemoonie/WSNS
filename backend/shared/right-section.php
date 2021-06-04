@@ -15,7 +15,7 @@
                     </div>
                     <div class="annoucement-post container">
                         <div class="announcement-post-content">
-                            <article class="">THIS IS AN ANNOUNCEMENT</article>
+                            <?php $announce->showAnnouncement();?>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 <?php $pageTitle="Events | WeLink";
- Include_once 'backend\initialize.php';  
+Include_once 'backend\initialize.php'; 
+Include_once 'backend\shared\header.php';  
 ?>
 <div class="container-fluid homepage">
     <div class="homepage-section row">

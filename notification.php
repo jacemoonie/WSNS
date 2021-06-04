@@ -1,5 +1,6 @@
 <?php $pageTitle="Notification | WeLink";
- Include_once 'backend\initialize.php'; 
+Include_once 'backend\initialize.php'; 
+Include_once 'backend\shared\header.php'; 
 
  $user_id = $_SESSION['userLoggedIn'];
 $status = $verify->getVerifyStatus("status",$user_id);

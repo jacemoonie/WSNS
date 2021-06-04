@@ -1,10 +1,19 @@
 <?php
-include_once "backend\initialize.php" ;
+Include_once 'backend\initialize.php'; 
+Include_once 'backend\shared\header.php'; 
 
 if(Login::isLoggedIn()){
     $userId = Login::isLoggedIn();
 }else if(isset($_SESSION['userLoggedIn'])){
+    $user_id = $_SESSION['userLoggedIn'];
+    $status = 0;
+    $loadFromUser->update("users",$user_id,array("userStatus"=>$status));
     log_out_user();
+    redirect_to(url_for("index"));
+    
+}else if(isset($_SESSION['adminLoggedIn'])){
+    $user_id = $_SESSION['adminLoggedIn'];
+    log_out_admin();
     redirect_to(url_for("index"));
     
 }else{

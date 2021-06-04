@@ -16,8 +16,13 @@ if(is_post_request()){
         if($wasSuccessful){
             $user_id = $wasSuccessful;
             $_SESSION['userLoggedIn'] = $wasSuccessful;
-
-            redirect_to(url_for("home"));
+            //set users status to online
+            $status = 1;
+            $loadFromUser->update("users",$user_id,array("userStatus"=>$status));
+            if($loadFromUser){
+                redirect_to(url_for("home"));
+            }
+            
 
         }
     }

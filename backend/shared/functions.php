@@ -28,6 +28,12 @@ function log_out_user(){
     return true;
 }
 
+function log_out_admin(){
+    unset($_SESSION['adminLoggedIn']);
+    session_destroy();
+    return true;
+}
+
 function getInputValue($name){
     if(isset($_POST[$name])){
         echo $_POST[$name];

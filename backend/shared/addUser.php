@@ -12,22 +12,13 @@ if(is_post_request()){
         $wasSuccessful = $account->register($fname,$lname,$username,$email,$pass,$pass2);
         
         // if register successful
-        if($wasSuccessful){
-            // echo "User registered!";
-            // start session
-            $_SESSION['userLoggedIn'] = $wasSuccessful;
-
-            //Email verification
-            redirect_to(url_for("verification"));
-
-        }else{
-
+        if(!$wasSuccessful){
             //if failed to register
             echo '
             <script>
 
             $(document).ready(function() {
-              $("#signupModal").modal("show");
+              $("#createUserModal").modal("show");
             });
             
             </script>';

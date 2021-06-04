@@ -1,13 +1,11 @@
-<?php Include_once 'backend\shared\register_handler.php'; ?>
+<?php Include_once 'backend\shared\addUser.php'; ?>
 
 <!-- Signup Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+<div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content signup">
         <div class="modal-header">
-            <div class="modal-icon">
-                <h3 class="">Create new account</h3>
-            </div>
+            <h3 class="modal-title" id="createUserModalLabel">Create new user</h3>
         </div>
         <div class="signup modal-body">
             <form class="signupForm" action="<?php echo h($_SERVER['PHP_SELF']);?> " method="POST">
@@ -44,7 +42,7 @@
             </div>
             <div class="signup modal-footer">
                 <button type="button" class="signup-cancel" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="signup-submit">Sign up</button>
+                <button type="submit" class="signup-submit">Create</button>
             </div>
             </form>
         </div>

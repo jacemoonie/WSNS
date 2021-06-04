@@ -16,6 +16,13 @@ if(is_post_request()){
         // echo $limit;
         $loadFromPosts->postsProfile($userid,$profileId,$limit);
     }
+
+    if(isset($_POST['fetchPostsAdmin']) && !empty($_POST['fetchPostsAdmin'])){
+
+        $limit = (int)trim($_POST['fetchPostsAdmin']);
+        // echo $limit;
+        $admin->recentPosts($limit);
+    }
 }
 
 ?>

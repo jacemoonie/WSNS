@@ -30,9 +30,11 @@ $loadFromProfile = new Profile;
 $loadFromFriend = new Friend;
 $loadFromMessage = new Message;
 $loadFromGroup = new Group;
+$admin = new Admin;
+$announce = new Announcement;
 
 require_once(__ROOT__.'\backend\shared\functions.php'); 
-require_once(__ROOT__.'\backend\shared\header.php');
+// require_once(__ROOT__.'\backend\shared\header.php');
 
 
 

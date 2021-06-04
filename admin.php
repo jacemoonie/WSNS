@@ -1,7 +1,32 @@
-<?php $pageTitle="Log in | WeLink";
+<?php $pageTitle="Admin log in | WeLink";
 Include_once 'backend\initialize.php'; 
 Include_once 'backend\shared\header.php';  
- include 'backend\shared\login_handlers.php';
+
+//check if user login
+if(isset($_SESSION['adminLoggedIn'])){
+    redirect_to(url_for("dashboard"));
+}
+
+
+if(is_post_request()){
+   
+    if(isset($_POST['username']) && !empty($_POST['username'])){
+        
+        $username=FormSanitizer::formSanitizerName($_POST['username']);
+        $pass=FormSanitizer::formSanitizerString($_POST['password']);
+        // echo $pass_hash=password_hash($pass,PASSWORD_BCRYPT);
+        $wasSuccessful = $account->adminLogin($username,$pass);
+        if($wasSuccessful){
+            
+            $admin_id = $wasSuccessful;
+            $_SESSION['adminLoggedIn'] = $wasSuccessful;
+
+            redirect_to(url_for('dashboard'));
+
+        }
+    }
+
+}
 ?>
 <div class="container-fluid login">
     <div class="login-form-content row">
@@ -35,7 +60,7 @@ Include_once 'backend\shared\header.php';
             </div>
             <div class="login-footer row">
                 <span class="login-footer">
-                    <a href="" class="">Forgot password?</a> · <a href="" data-bs-toggle="modal" data-bs-target="#signupModal" class="">Sign up for Welink</a><?php include 'backend\modal\signupModal.php' ?></span>
+                    <a href="" class="">Forgot password?</a> · <a href="<?php echo url_for('index'); ?>"  class="">Back to website</a></span>
             </div>               
         </div>
     </div>

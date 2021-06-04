@@ -1,5 +1,6 @@
 <?php $pageTitle="Home | WeLink";
- Include_once 'backend\initialize.php'; 
+Include_once 'backend\initialize.php'; 
+Include_once 'backend\shared\header.php'; 
 
  //check if user is logged in
 if(isset($_SESSION['userLoggedIn'])){
@@ -63,5 +64,5 @@ $user = $loadFromUser->userData($user_id);
         <?php include 'backend\shared\right-section.php'; ?>
     </div>
 </div>
-
+<script src="<?php echo url_for('frontend\assets\js\delete.js'); ?>"></script>
 <?php include 'backend\loadJsFiles.php'; ?>
