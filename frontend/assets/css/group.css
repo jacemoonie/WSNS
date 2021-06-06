@@ -1,36 +1,92 @@
 /* Group Style */
 .group-edit-btn img {
-    height: 20px;
-  }
-  .group-edit-btn img {
-    height: 20px;
-  }
-  .group-edit-btn {
-    display: flex;
-    align-items: baseline;
-    flex: 1;
-  }
-  .group-name {
-    font-size: 1.5rem;
-    font-weight: 800;
-  }
-  .group-description article {
-    font-size: 1.3rem;
-  }
-  input.s-member {
-    flex: 1;
-    padding: 1rem;
-    font-size: 1.5rem;
-    font-weight: 400;
-    border: none;
-    width: 100%;
-  }
-  
-  .addMember{
-    padding: 1.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: rgb(15,20,15);
-    border-bottom: .1rem solid rgb(235.238,240);
-    cursor: pointer;
+  height: 20px;
 }
+.group-edit-btn img {
+  height: 20px;
+}
+.group-edit-btn {
+  display: flex;
+  align-items: baseline;
+  flex: 1;
+  flex-direction: row-reverse;
+}
+.group-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.group-description article {
+  font-size: 1.3rem;
+}
+input.s-member {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  border: none;
+  width: 100%;
+}
+
+.addMember{
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(15,20,15);
+  border-bottom: .1rem solid rgb(235.238,240);
+  cursor: pointer;
+}
+.col-3.add-participant-btn {
+display: flex;
+flex: 1;
+flex-direction: row-reverse;
+}
+span.participant-name {
+background: #d0defb;
+padding: 5px;
+border-radius: 5px;
+}
+.participant-info {
+  display: flex;
+  margin-left: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+.participant-list {
+display: flex;
+}
+.cancel-participant {
+cursor: pointer;
+}
+span.edit-remove-participant{
+  cursor: pointer;
+}
+.participant-list {
+display: flex;
+flex-wrap: wrap;
+}
+.selected-participant-list {
+display: flex;
+flex-wrap: wrap;
+}
+#err-msg {
+margin: 10px;
+color: red;
+font-size: 1.2rem;
+}
+span.r-msg-name {
+font-size: 1.2rem;
+font-weight: 800;
+}
+.chat-header-name-wrapper.group {
+display: flex;
+flex-direction: column;
+}
+#edit-err-msg {
+  margin: 10px;
+  color: red;
+  font-size: 1.2rem;
+  }
+  .group-participant-list {
+    display: flex;
+    flex-wrap: wrap;
+    }

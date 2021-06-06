@@ -32,6 +32,7 @@ $loadFromMessage = new Message;
 $loadFromGroup = new Group;
 $admin = new Admin;
 $announce = new Announcement;
+$loadFromGroupMessage = new GroupMessage;
 
 require_once(__ROOT__.'\backend\shared\functions.php'); 
 // require_once(__ROOT__.'\backend\shared\header.php');

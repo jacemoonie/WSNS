@@ -8,6 +8,7 @@ $(function(){
 
         $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPostsHomeFriendOnly:$uid},function(data){
                 console.log(data);
+            
                 // $('.postContainer').html(data);
         })
     })

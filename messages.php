@@ -21,7 +21,8 @@ if(!isset($_GET['message'])){
                <div class="message-header container">
                    <h2 class="">Messages</h2>
                    <a href="<?php echo url_for("messages/compose") ?>" class="n-msg " role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#newMessageModal"><img height="20px" width="20px" src="<?php echo url_for('frontend\assets\images\plus-sign.png');?>" alt="" class=""></a>
-               </div>
+                   <?php include 'backend\modal\messageModal.php' ?>
+                </div>
                 <div class="messages-list-container">
                     <ul class="msg-user-add">
                     </ul>
@@ -77,6 +78,7 @@ if(!isset($_GET['message'])){
         </div>
     </div>
 </div>
+<script src="<?php echo url_for('frontend\assets\js\message.js'); ?>"></script>
 <?php include 'backend\loadJsFiles.php'; ?>
 <script>
     $uid = $(".u-p-id").data("uid")
