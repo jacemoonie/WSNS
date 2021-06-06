@@ -46,10 +46,10 @@ $user = $loadFromUser->userData($user_id);
                <div class="home-feed-container row">
                    <div class="home-feed-content">
                        <div class="filter-tab">
-                           <a href="" class="show-all-tab">
+                           <a href="#" class="active show-all-tab">
                                <span class="">All</span>
                            </a>
-                           <a href="" class="show-friend-only">
+                           <a href="#" class="show-friend-only">
                                <span class="">Friend</span>
                            </a>
                        </div>
@@ -65,4 +65,34 @@ $user = $loadFromUser->userData($user_id);
     </div>
 </div>
 <script src="<?php echo url_for('frontend\assets\js\delete.js'); ?>"></script>
+<script src="<?php echo url_for('frontend\assets\js\home.js'); ?>"></script>
 <?php include 'backend\loadJsFiles.php'; ?>
+<script>
+    $uid = $(".u-p-id").data("uid");
+    $(document).ready(function(){
+       
+        //LOAD RECENT ANNOUNCEMENT
+        function userLoadRecentAnnouncement(){
+            
+            $.post("http://localhost/WSNS/backend/ajax/fetchAnnouncementHome.php",function(data){
+                // alert(data);
+                $('.announcement-post-content').html(data);
+            })
+        }
+        //LOAD RECENT POST
+        function userLoadRecentPosts(){
+            
+            $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPostsHome:$uid},function(data){
+                // console.log(data);
+                $('.postContainer').html(data);
+            })
+        }
+
+        //LOAD RECENT EVENT
+
+        var loadTimer = setInterval(() => {
+            userLoadRecentPosts();
+            userLoadRecentAnnouncement();
+        }, 1000);
+    })
+</script>

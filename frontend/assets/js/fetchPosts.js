@@ -26,13 +26,32 @@ $(function(){
                     $(".postContainer").html(data);
                 })
             }
-
-            if(window.location.href ==="http://localhost/WSNS/dashboard"){
-                $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPostsAdmin:offset},function(data){   
-                    $(".postContainer").html(data);
-                })
-            }
         }
            
     })
+
+    $(document).ready(function(){
+    
+        $('#myDIV').bind('scroll',chk_scroll);
+    });
+    
+    function chk_scroll(e)
+    {
+        var elem = $(e.currentTarget);
+        offset += 10;
+        let content_height =elem.outerHeight();
+        let content_y = elem[0].scrollHeight - elem.scrollTop();
+
+        console.log(content_y + "/"+content_height);
+
+        if ( content_y <= content_height +1)
+        {
+            // console.log("Bottom");
+            $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPostsAdmin:offset},function(data){   
+                $(".postContainer").html(data);
+            })
+        }
+    
+    }
+    
 })

@@ -1,7 +1,8 @@
-<?php $pageTitle="Profile | WeLink";
+<?php $pageTitle="Manage users | WeLink";
 Include_once 'backend\initialize.php'; 
 Include_once 'backend\shared\header.php'; 
-include 'backend\shared\editProfile_handlers.php'; 
+Include 'backend\shared\addUser.php';
+include 'backend\shared\editUser_handlers.php';
 
  //check if user is logged in
 if(isset($_SESSION['adminLoggedIn'])){
@@ -22,18 +23,20 @@ if(isset($_SESSION['adminLoggedIn'])){
             <div class="mid-section col-sm"> 
                 <div class="announce-header container">
                    <h2 class="">Users</h2>
-                   <a href="" class="n-msg " role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#createUserModal"><img height="20px" width="20px" src="<?php echo url_for('frontend\assets\images\plus-sign.png');?>" alt="" class=""></a>
+                   <a href="" class="n-msg " role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#createUserModal">
+                       <img height="20px" width="20px" src="<?php echo url_for('frontend\assets\images\plus-sign.png');?>" alt="" class="">
+                    </a>
                    <?php include 'backend\modal\createUser.php'; ?>
                   
                </div>
-               <div class="announcement-list">
+               <div class="users-list" id="users-list">
                <div class="container-xl">
                     <div class="table-responsive">
                         <div class="table-wrapper">
                             <div class="table-title">
                                 <div class="row">
                                     <div class="col-sm-7">
-                                        <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>						
+                                        <input id="pdf-button" class="Button" type="button" value="Download PDF" />					
                                     </div>
                                 </div>
                             </div>
@@ -51,8 +54,29 @@ if(isset($_SESSION['adminLoggedIn'])){
                                 <tbody>
                                     <?php $loadFromUser->allUserData();?>
                                     <?php include 'backend\modal\editUser.php'; ?>
+                                    <?php include 'backend\modal\deleteModal.php'; ?>
                                 </tbody>
                             </table>
+                            <div id="container" style="display:none;">
+                                <div id="main">
+                                    <div id="header">
+                                    <div id="header_info black">1234 Made Up LN <span class="black">|</span> (555)-555-5555 <span class="black">|</span> wsns.com</div>
+                                    </div>
+                                    <h1 class="black" id="quote_name">WeLink | Users List Report</h1>
+                                    <table id="phase_details">
+                                    <thead>
+                                        <tr>
+                                        <th class="title">User ID</th>
+                                        <th class="title">Name</th>
+                                        <th class="title">Username</th>
+                                        <th class="title">Email</th>
+                                        <th class="title">Date Joined</th>
+                                        </tr>
+                                    </thead>
+                                        <?php $loadFromUser->allUserDataTable();?>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>     
@@ -60,5 +84,6 @@ if(isset($_SESSION['adminLoggedIn'])){
            </div>
     </div>
 </div>
-<script src="<?php echo url_for('frontend\assets\js\Announcement.js'); ?>"></script>
+
+<script src="<?php echo url_for('frontend\assets\js\User.js'); ?>"></script>
 <?php include 'backend\loadJsFiles.php'; ?>

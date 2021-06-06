@@ -54,4 +54,8 @@
       margin-left: 80px;
   
   }
-  
+  span.noti-counter {
+    font-size: 1.5rem;
+    color: red;
+    padding-left: 10%;
+}

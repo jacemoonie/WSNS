@@ -1,6 +1,7 @@
 <?php $pageTitle="Announcement | WeLink";
 Include_once 'backend\initialize.php'; 
 Include_once 'backend\shared\header.php'; 
+include 'backend\shared\announcement_handlers.php';
 
  //check if user is logged in
 if(isset($_SESSION['adminLoggedIn'])){
@@ -11,25 +12,6 @@ if(isset($_SESSION['adminLoggedIn'])){
     redirect_to(url_for("index"));
 }else{
     redirect_to(url_for("admin.php"));
-}
-
-if(is_post_request()){
-    if(isset($_POST['description']) && !empty(isset($_POST['description']))){
-       $msg = h($_POST['description']);
-       $createAnnouncement = $announce->createAnnouncement($msg);
-       if(!$createAnnouncement){
-           echo "FAILED TO CREATE ANNOUNCEMENT";
-       }
-    }
-
-    if(isset($_POST['ann_id']) && !empty(isset($_POST['ann_id']))){
-        $ann_id = h($_POST['ann_id']);
-        $msg = h($_POST['edit-description']);
-        $updateAnnouncement = $announce->updateAnnouncement($ann_id,$msg);
-        if(!$updateAnnouncement){
-            echo "FAILED TO UPDATE ANNOUNCEMENT";
-        }
-     }
 }
 
 ?>

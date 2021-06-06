@@ -1,13 +1,10 @@
-<?php Include_once 'backend\shared\register_handler.php'; ?>
-
+<?php Include 'backend\shared\register_handler.php'; ?>
 <!-- Signup Modal -->
 <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content signup">
         <div class="modal-header">
-            <div class="modal-icon">
-                <h3 class="">Create new account</h3>
-            </div>
+            <h3 class="">Create new account</h3>
         </div>
         <div class="signup modal-body">
             <form class="signupForm" action="<?php echo h($_SERVER['PHP_SELF']);?> " method="POST">
@@ -32,7 +29,7 @@
                 <?php echo $account->getError(Constants::$passwordTooShort); ?>
                 <?php echo $account->getError(Constants::$passwordAlphaNumeric); ?>
                 <label for="password" class="col-form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="password" autocomplete="off" required>
+                <input type="password" name="password" class="form-control" id="password1" autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <label for="password2" class="col-form-label">Confirm Password</label>
@@ -50,6 +47,4 @@
         </div>
         </div>
     </div>
-</div>
-   
-<script src="<?php echo url_for('frontend\assets\js\showPassword.js'); ?>"></script>                 
+</div>               

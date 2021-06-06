@@ -16,6 +16,7 @@
     <link rel="icon" href="<?php echo url_for('frontend\assets\images\link-icon.svg');?>">
     <link rel="stylesheet" href="<?php echo url_for('frontend\assets\css\master.css');?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://docraptor.com/docraptor-1.0.0.js"></script>
   </head>
   <body>
     <!-- Optional JavaScript; choose one of the two! -->

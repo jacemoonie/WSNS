@@ -1,7 +1,7 @@
 <?php
 
-$title = "Confirm delete post";
-$msg = "This can't be undone, post will be deleted. Confirm to delete post?";
+$title = "Confirm delete";
+$msg = "This can't be undone, content will be deleted. Confirm to delete?";
 
 ?>
 <!-- Modal -->

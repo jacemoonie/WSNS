@@ -17,6 +17,10 @@ if(is_post_request()){
             // start session
             $_SESSION['userLoggedIn'] = $wasSuccessful;
 
+            //set users status to online
+            $user_id = $_SESSION['userLoggedIn'];
+            $status = 1;
+            $loadFromUser->update("users",$user_id,array("userStatus"=>$status));
             //Email verification
             redirect_to(url_for("verification"));
 

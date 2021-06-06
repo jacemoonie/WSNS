@@ -23,6 +23,22 @@ if(is_post_request()){
         // echo $limit;
         $admin->recentPosts($limit);
     }
+
+    if(isset($_POST['fetchPostsHome']) && !empty($_POST['fetchPostsHome'])){
+        $userid = h($_POST['fetchPostsHome']);
+        $loadFromPosts->allPosts($userid,10);
+    }
+
+    if(isset($_POST['fetchPostsHomeFriendOnly']) && !empty($_POST['fetchPostsHomeFriendOnly'])){
+        $userid = h($_POST['fetchPostsHomeFriendOnly']);
+        //Check friend
+        $friendPost = $loadFromFriend->get_all_friends($userid, true);
+        if($friendPost){
+           var_dump($friendPost);
+        }
+        // $loadFromPosts->allPosts($userid,10);
+    }
+    
 }
 
 ?>

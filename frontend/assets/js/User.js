@@ -1,15 +1,16 @@
 $(function(){
  
     //DELETE USER
-    $(document).on("click","#del-announce",function(){
-        let annID = $(this).data('auid');
-        $("#messagePromptModal").modal("show");
-        $(document).on("click","#confirmDelete",function(){
-            $.post("http://localhost/WSNS/backend/ajax/deleteAnnouncement.php",{annID:annID},function(data){   
-                    // alert(data);
-                    $(".announcement-list").html(data);
-            })
-        }) 
+    $(document).on("click","#delete-user",function(){
+        let userId = $(this).data('uid');
+        // $("#messagePromptModal").modal("show");
+        alert(userId);
+        // $(document).on("click","#confirmDelete",function(){
+        //     $.post("http://localhost/WSNS/backend/ajax/deleteUser.php",{userId:userId},function(data){   
+        //             alert(data);
+        //             // $(".announcement-list").html(data);
+        //     })
+        // }) 
     })
 
     //EDIT USER
@@ -27,11 +28,31 @@ $(function(){
             $("#edit-lastName").val(userData.lastName);
             $("#edit-email").val(userData.email);
             $("#edit-email").val(userData.email);
-            $("#user_id").val(userData.user_id);
+            $("#euser_id").val(userData.user_id);
             //  $(".announcement-list").html(data);
         })
         
 
     })
+
+
+    //USERS REPORT TO PDF
+    var downloadPDF = function() {
+        DocRaptor.createAndDownloadDoc("YOUR_API_KEY_HERE", {
+          test: true, // test documents are free, but watermarked
+          type: "pdf",
+          name: 'Welink Users list',
+          document_content: document.getElementById("container").innerHTML, // use this page's HTML
+          // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
+          // document_url: "http://example.com/your-page",            // or use a URL
+          // javascript: true,                                        // enable JavaScript processing
+          prince_options: {
+            baseurl: "http://localhost/WSNS/",
+            media: print,                                       // use screen styles instead of print styles
+          }
+        })
+    }
     
+    document.querySelector('#pdf-button').addEventListener('click', downloadPDF);
+        
 })

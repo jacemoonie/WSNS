@@ -14,7 +14,7 @@ $(function(){
         $.post("http://localhost/WSNS/backend/ajax/deletePost.php",{postId:$postID,userId:$userId,postBy:$postBy},function(data){   
                 // alert(data);
                 $(".postContainer").html(data);
-                location.reload(true);
+                // location.reload(true);
         })
     }) 
     

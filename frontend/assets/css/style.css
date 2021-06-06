@@ -28,6 +28,9 @@ html{
 a{
   text-decoration: none !important;
 }
+.active {
+  background-color: #d0defb;
+}
 
 button{
   background-color: #5f91f2;
@@ -162,7 +165,7 @@ margin-bottom: 15px;
   padding-left: 45%;
 }
 .signupForm label {
-  font-size: 2rem;
+  font-size: 1.3rem;
 }
 #signupModalLabel {
   font-size: 2rem;
@@ -189,9 +192,8 @@ font-size: 1.5rem;
 span.errorMessage {
 display: block;
 color: red;
-font-size: 1.5rem;
+font-size: 1.2rem;
 font-weight: 600;
-margin-bottom: 1.3rem;
 }
 
 /* Login style */

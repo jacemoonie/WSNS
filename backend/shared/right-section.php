@@ -14,7 +14,7 @@
                        <span class="speaker-icon"><img src="frontend\assets\images\speaker-announce.svg" alt="" class=""></span> 
                     </div>
                     <div class="annoucement-post container">
-                        <div class="announcement-post-content">
+                        <div class="announcement-post-content"> 
                             <?php $announce->showAnnouncement();?>
                         </div>
                     </div>

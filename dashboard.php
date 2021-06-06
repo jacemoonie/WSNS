@@ -38,7 +38,7 @@ $user = $admin->adminData($user_id);
                </div>
                <div class="recent-user row">
                 <div class="recent col"><h3 class="">Recent Users activity</h3></div>
-                <div class="recent container">
+                <div class="recent container" id="myDIV">
                     <section aria-label="Timeline:Your Home Timeline" class="postContainer">
                         <?php $admin->recentPosts(10);?>
                     </section>

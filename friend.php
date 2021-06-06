@@ -49,14 +49,6 @@ $get_all_friends = $loadFromFriend->get_all_friends($_SESSION['userLoggedIn'], t
                    <img src="frontend\assets\images\plus-sign.png" alt="" class="">
                    <img src="frontend\assets\images\settings.png" alt="" class="notification-setting-icon">
                </div>
-               <div class="message-search-engine row">
-                    <div class="message-search-engine-form">
-                        <form class="message-search-bar" action="">
-                            <input type="text" placeholder="Search.." name="search2">
-                            <button type="submit"><img src="frontend\assets\images\magnifying-glass.svg" alt="" class=""></button>
-                        </form>
-                    </div>
-                </div>
                 <div class="messages-list">
                     <h3>All friends</h3>
                     <div class="usersWrapper">

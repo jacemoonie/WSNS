@@ -50,16 +50,6 @@ class Posts{
                            <div class="user-post row">
                                <article>'.$post->status.'</article>
                            </div>
-                            <div class="posts-btn row">
-                                <div class="comment-btn col">
-                                <img src="'.url_for("frontend\assets\images\comment.svg").'" alt="" class="">
-                                    <div class="comment-counter"><span class="">0</span></div>
-                                </div>
-                                <div class="like-btn col">
-                                    <img src="'.url_for("frontend\assets\images\like.svg").'" alt="" class="">
-                                    <div class="like-counter"><span class="">0</span></div>
-                                </div>
-                            </div>
                        </div>
             </article> ';
         }
@@ -104,16 +94,6 @@ class Posts{
                            <div class="user-post row">
                                <article>'.$post->status.'</article>
                            </div>
-                            <div class="posts-btn row">
-                                <div class="comment-btn col">
-                                <img src="'.url_for("frontend\assets\images\comment.svg").'" alt="" class="">
-                                    <div class="comment-counter"><span class="">0</span></div>
-                                </div>
-                                <div class="like-btn col">
-                                    <img src="'.url_for("frontend\assets\images\like.svg").'" alt="" class="">
-                                    <div class="like-counter"><span class="">0</span></div>
-                                </div>
-                            </div>
                        </div>
             </article> ';
         }
@@ -155,16 +135,6 @@ class Posts{
                            <div class="user-post row">
                                <article>'.$post->status.'</article>
                            </div>
-                            <div class="posts-btn row">
-                                <div class="comment-btn col">
-                                <img src="'.url_for("frontend\assets\images\comment.svg").'" alt="" class="">
-                                    <div class="comment-counter"><span class="">0</span></div>
-                                </div>
-                                <div class="like-btn col">
-                                    <img src="'.url_for("frontend\assets\images\like.svg").'" alt="" class="">
-                                    <div class="like-counter"><span class="">0</span></div>
-                                </div>
-                            </div>
                        </div>
             </article> ';
         }

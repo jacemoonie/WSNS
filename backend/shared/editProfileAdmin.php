@@ -87,8 +87,8 @@ if(is_post_request()){
     //Update profile
     $updateProfile = $account->updateAdminProfile($user_id,$fname,$lname,$username,$email,$password,$password2,$linkImage);
 
-    if($updateProfile){
-        echo "Update success";
+    if(!$updateProfile){
+        echo "Update Failed";
     }
 
 }

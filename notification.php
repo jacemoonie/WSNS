@@ -51,14 +51,6 @@ $get_all_req_sender = $loadFromFriend->request_notification($_SESSION['userLogge
                </div>
                <div class="noti-feed-container row">
                    <div class="noti-feed-content">
-                       <div class="filter-tab">
-                           <a href="" class="show-all-tab">
-                               <span class="">All</span>
-                           </a>
-                           <a href="" class="show-friend-only">
-                               <span class="">Friend</span>
-                           </a>
-                       </div>
                        <?php include 'backend\shared\notification.php'; ?>
                    </div>
                </div>

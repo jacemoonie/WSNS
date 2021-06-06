@@ -1,4 +1,3 @@
-
 <!-- Edit user Modal -->
 <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -8,7 +7,7 @@
         </div>
         <div class="signup modal-body">
         <form class="editProfileForm" action="<?php $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="user_id" id="user_id" value="" class="">
+                <input type="hidden" name="euser_id" id="euser_id" value="" class="">
                 <div class="mb-3">
                     <div class="profile-pic">
                         <span class="text-uppercase name">Profile Picture</span>
@@ -26,30 +25,30 @@
                 </div>
                 <div class="mb-3">
                     <?php echo $account->getError(Constants::$firstNameCharacters); ?>
-                    <label for="firstName" class="col-form-label">First name</label>
-                    <input type="text" name="firstName" class="form-control" id="edit-firstName"  value="" autocomplete="off" >
+                    <label for="efirstName" class="col-form-label">First name</label>
+                    <input type="text" name="efirstName" class="form-control" id="edit-firstName"  value="" autocomplete="off" >
                 </div>
                 <div class="mb-3">
                     <?php echo $account->getError(Constants::$lastNameCharacters); ?>
-                    <label for="lastName" class="col-form-label">Last name</label>
-                    <input type="text" name="lastName" class="form-control" id="edit-lastName"  value="" autocomplete="off"  >
+                    <label for="elastName" class="col-form-label">Last name</label>
+                    <input type="text" name="elastName" class="form-control" id="edit-lastName"  value="" autocomplete="off"  >
                 </div>
                 <div class="mb-3">
                     <?php echo $account->getError(Constants::$emailTaken); ?>
                     <?php echo $account->getError(Constants::$emailInvalid); ?>
-                    <label for="email" class="col-form-label">Email</label>
-                    <input type="email" name="email" class="form-control" id="edit-email"  value="" autocomplete="off" >
+                    <label for="eemail" class="col-form-label">Email</label>
+                    <input type="email" name="eemail" class="form-control" id="edit-email"  value="" autocomplete="off" >
                 </div>
                 <div class="mb-3">
                     <?php echo $account->getError(Constants::$passwordDoNotMatch); ?>
                     <?php echo $account->getError(Constants::$passwordTooShort); ?>
                     <?php echo $account->getError(Constants::$passwordAlphaNumeric); ?>
-                    <label for="password" class="col-form-label">New password</label>
-                    <input type="password" name="password" class="form-control" id="edit-password" autocomplete="off" >
+                    <label for="epassword" class="col-form-label">New password</label>
+                    <input type="password" name="eassword" class="form-control" id="edit-password" autocomplete="off" >
                 </div>
                 <div class="mb-3">
-                    <label for="password2" class="col-form-label">Confirm new password</label>
-                    <input type="password" name="password2" class="form-control" id="edit-password2" autocomplete="off" >
+                    <label for="epassword2" class="col-form-label">Confirm new password</label>
+                    <input type="password" name="epassword2" class="form-control" id="edit-password2" autocomplete="off" >
                 </div>
                 <div class="mb-3">
                     <input type="checkbox" class="" id="s-password" onclick="showPassword()">

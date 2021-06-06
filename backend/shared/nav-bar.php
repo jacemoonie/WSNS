@@ -21,6 +21,9 @@
                                 <span class="nav-title">
                                 Notification
                                 </span>
+                                <span id="noti-counter" class="noti-counter">
+                                    0
+                                </span>
                             </a>
                             <a href="<?php echo url_for('messages');?>">
                                 <span class="nav-icon">

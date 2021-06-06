@@ -1,6 +1,4 @@
-<?php Include_once 'backend\shared\addUser.php'; ?>
-
-<!-- Signup Modal -->
+<!-- Create user Modal -->
 <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content signup">
@@ -12,29 +10,29 @@
             <div class="mb-3">
                 <?php echo $account->getError(Constants::$firstNameCharacters); ?>
                 <label for="firstName" class="col-form-label">First name</label>
-                <input type="text" name="firstName" class="form-control" id="firstName"  value="<?php getInputValue('firstName');?>" autocomplete="off" required>
+                <input type="text" name="a-firstName" class="form-control" id="firstName"  value="<?php getInputValue('firstName');?>" autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <?php echo $account->getError(Constants::$lastNameCharacters); ?>
                 <label for="lastName" class="col-form-label">Last name</label>
-                <input type="text" name="lastName" class="form-control" id="lastName"  value="<?php getInputValue('lastName');?>" autocomplete="off" required>
+                <input type="text" name="a-lastName" class="form-control" id="lastName"  value="<?php getInputValue('lastName');?>" autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <?php echo $account->getError(Constants::$emailTaken); ?>
                 <?php echo $account->getError(Constants::$emailInvalid); ?>
                 <label for="email" class="col-form-label">Email</label>
-                <input type="email" name="email" class="form-control" id="email"  value="<?php getInputValue('email');?>" autocomplete="off" required>
+                <input type="email" name="a-email" class="form-control" id="email"  value="<?php getInputValue('email');?>" autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <?php echo $account->getError(Constants::$passwordDoNotMatch); ?>
                 <?php echo $account->getError(Constants::$passwordTooShort); ?>
                 <?php echo $account->getError(Constants::$passwordAlphaNumeric); ?>
                 <label for="password" class="col-form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="password" autocomplete="off" required>
+                <input type="password" name="a-password" class="form-control" id="password" autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <label for="password2" class="col-form-label">Confirm Password</label>
-                <input type="password" name="password2" class="form-control" id="password2" autocomplete="off" required>
+                <input type="password" name="a-password2" class="form-control" id="password2" autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <input type="checkbox" class="" id="s-password" onclick="showPassword()">

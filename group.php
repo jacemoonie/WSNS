@@ -35,7 +35,7 @@ if(is_post_request()){
            <div class="message-section container">
                <div class="message-header container">
                    <h2 class="">Group</h2>
-                   <a href="<?php echo url_for("messages/compose") ?>" class="n-msg " role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#newGroupMessageModal"><img height="20px" width="20px" src="<?php echo url_for('frontend\assets\images\plus-sign.png');?>" alt="" class=""></a>
+                   <a href="<?php echo url_for("group/compose") ?>" class="n-msg " role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#newGroupMessageModal"><img height="20px" width="20px" src="<?php echo url_for('frontend\assets\images\plus-sign.png');?>" alt="" class=""></a>
                </div>
                 <div class="messages-list-container">
                     <ul class="msg-user-add">

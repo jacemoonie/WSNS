@@ -10,6 +10,7 @@ if(is_post_request()){
 
         if($userId == $postBy){
             $loadFromUser->delete("post",["postBy"=>$userId,"postID"=>$postID]);
+            echo $loadFromPosts->allPosts($userId,10);
         }   
 
     }

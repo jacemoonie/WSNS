@@ -1,7 +1,7 @@
 <?php 
 Include_once 'backend\initialize.php'; 
 Include_once 'backend\shared\header.php'; 
- $pageTitle="WeLink - Social Networking Site | WSNS";
+$pageTitle="WeLink - Social Networking Site | WSNS";
 
  //check if user is logged in
 if(isset($_SESSION['userLoggedIn'])){
@@ -45,3 +45,4 @@ $admin->updateViews();
     
   </body>
 </html>
+<script src="<?php echo url_for('frontend\assets\js\showPassword.js'); ?>"></script>
