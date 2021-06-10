@@ -4,11 +4,14 @@ class Posts{
 
     private $pdo;
     private $user;
+    private $friend;
     // private $postControls;
 
     public function __construct(){
         $this->pdo = Database::Instance();
         $this->user = new User;
+        $this->friend = new Friend;
+
         // $this->postControls = new PostsControls;
     }
 
@@ -65,37 +68,79 @@ class Posts{
         foreach($posts as $post){
             // $postControls = new PostsControls;
             // $controls = $postControls->createControls($post->postID,$post->postBy,$user_id);
-            echo'<article role="article" data-focusable="true" tabIndex="0" class="post">
-            <div class="feed-post-container row">
-                           <div class="post-content-container">
-                               <div class="user-pic">
-                                   <img src="'.url_for($post->profileImage).'" alt="" class="">
-                               </div>
-                               <div class="user-profile-details">
-                                   <span class="name"><a href="'.url_for($post->username).'">'.$post->firstName.' '.$post->lastName.'</a></span>
-                                   <span class="username">@'.$post->username.'</span>
-                                   <span class="date">'.$this->user->timeAgo($post->postedOn).'</span>
-                               </div>
-                               <div class="post-edit-btn">
-                               '.(($post->postBy===$user_id) ? '
-                               <div class="d-wrapper-container">
-                               <div class="d-wrapper">
-                                   <div class="d-content" id="del-content">
-                                       <div class="d-image">
-                                           <button type="button" data-post="'.$post->postID.'" data-postBy="'.$post->postBy.'" data-user="'.$user_id.'" id="delete-post-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messagePromptModal">
-                                            <svg viewBox="0 0 24 24" class="del-icon"><g><path d="M20.746 5.236h-3.75V4.25c0-1.24-1.01-2.25-2.25-2.25h-5.5c-1.24 0-2.25 1.01-2.25 2.25v.986h-3.75c-.414 0-.75.336-.75.75s.336.75.75.75h.368l1.583 13.262c.216 1.193 1.31 2.027 2.658 2.027h8.282c1.35 0 2.442-.834 2.664-2.072l1.577-13.217h.368c.414 0 .75-.336.75-.75s-.335-.75-.75-.75zM8.496 4.25c0-.413.337-.75.75-.75h5.5c.413 0 .75.337.75.75v.986h-7V4.25zm8.822 15.48c-.1.55-.664.795-1.18.795H7.854c-.517 0-1.083-.246-1.175-.75L5.126 6.735h13.74L17.32 19.732z"></path><path d="M10 17.75c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75zm4 0c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75z"></path></g></svg>
-                                         </button>
-                                        </div>
+            //check if status friend only
+            if($post->postPrivacy == 1){
+
+                if($this->friend->is_already_friends($user_id, $profileId) || $profileId==$user_id){
+                    echo'<article role="article" data-focusable="true" tabIndex="0" class="post">
+                    <div class="feed-post-container row">
+                                   <div class="post-content-container">
+                                       <div class="user-pic">
+                                           <img src="'.url_for($post->profileImage).'" alt="" class="">
+                                       </div>
+                                       <div class="user-profile-details">
+                                           <span class="name"><a href="'.url_for($post->username).'">'.$post->firstName.' '.$post->lastName.'</a></span>
+                                           <span class="username">@'.$post->username.'</span>
+                                           <span class="date">'.$this->user->timeAgo($post->postedOn).'</span>
+                                           <span class="date">Privacy : friend only</span>
+                                       </div>
+                                       <div class="post-edit-btn">
+                                       '.(($post->postBy===$user_id) ? 
+                                       '<div class="d-wrapper-container">
+                                       <div class="d-wrapper">
+                                           <div class="d-content" id="del-content">
+                                               <div class="d-image">
+                                                   <button type="button" data-post="'.$post->postID.'" data-postBy="'.$post->postBy.'" data-user="'.$user_id.'" id="delete-post-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messagePromptModal">
+                                                    <svg viewBox="0 0 24 24" class="del-icon"><g><path d="M20.746 5.236h-3.75V4.25c0-1.24-1.01-2.25-2.25-2.25h-5.5c-1.24 0-2.25 1.01-2.25 2.25v.986h-3.75c-.414 0-.75.336-.75.75s.336.75.75.75h.368l1.583 13.262c.216 1.193 1.31 2.027 2.658 2.027h8.282c1.35 0 2.442-.834 2.664-2.072l1.577-13.217h.368c.414 0 .75-.336.75-.75s-.335-.75-.75-.75zM8.496 4.25c0-.413.337-.75.75-.75h5.5c.413 0 .75.337.75.75v.986h-7V4.25zm8.822 15.48c-.1.55-.664.795-1.18.795H7.854c-.517 0-1.083-.246-1.175-.75L5.126 6.735h13.74L17.32 19.732z"></path><path d="M10 17.75c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75zm4 0c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75z"></path></g></svg>
+                                                 </button>
+                                                </div>
+                                           </div>
+                                       </div>
+                                   </div>' : '').'
+                                       </div>
+                                   </div>
+                                   <div class="user-post row">
+                                       <article>'.$post->status.'</article>
                                    </div>
                                </div>
-                           </div>' : '').'
+                    </article> ';
+                }
+
+            }else{
+                echo'<article role="article" data-focusable="true" tabIndex="0" class="post">
+                <div class="feed-post-container row">
+                               <div class="post-content-container">
+                                   <div class="user-pic">
+                                       <img src="'.url_for($post->profileImage).'" alt="" class="">
+                                   </div>
+                                   <div class="user-profile-details">
+                                       <span class="name"><a href="'.url_for($post->username).'">'.$post->firstName.' '.$post->lastName.'</a></span>
+                                       <span class="username">@'.$post->username.'</span>
+                                       <span class="date">'.$this->user->timeAgo($post->postedOn).'</span>
+                                   </div>
+                                   <div class="post-edit-btn">
+                                   '.(($post->postBy===$user_id) ? 
+                                   '<div class="d-wrapper-container">
+                                   <div class="d-wrapper">
+                                       <div class="d-content" id="del-content">
+                                           <div class="d-image">
+                                               <button type="button" data-post="'.$post->postID.'" data-postBy="'.$post->postBy.'" data-user="'.$user_id.'" id="delete-post-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messagePromptModal">
+                                                <svg viewBox="0 0 24 24" class="del-icon"><g><path d="M20.746 5.236h-3.75V4.25c0-1.24-1.01-2.25-2.25-2.25h-5.5c-1.24 0-2.25 1.01-2.25 2.25v.986h-3.75c-.414 0-.75.336-.75.75s.336.75.75.75h.368l1.583 13.262c.216 1.193 1.31 2.027 2.658 2.027h8.282c1.35 0 2.442-.834 2.664-2.072l1.577-13.217h.368c.414 0 .75-.336.75-.75s-.335-.75-.75-.75zM8.496 4.25c0-.413.337-.75.75-.75h5.5c.413 0 .75.337.75.75v.986h-7V4.25zm8.822 15.48c-.1.55-.664.795-1.18.795H7.854c-.517 0-1.083-.246-1.175-.75L5.126 6.735h13.74L17.32 19.732z"></path><path d="M10 17.75c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75zm4 0c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75z"></path></g></svg>
+                                             </button>
+                                            </div>
+                                       </div>
+                                   </div>
+                               </div>' : '').'
+                                   </div>
+                               </div>
+                               <div class="user-post row">
+                                   <article>'.$post->status.'</article>
                                </div>
                            </div>
-                           <div class="user-post row">
-                               <article>'.$post->status.'</article>
-                           </div>
-                       </div>
-            </article> ';
+                </article> ';
+            }
+            
+           
         }
         
     }
@@ -107,36 +152,107 @@ class Posts{
         foreach($posts as $post){
             // $postControls = new PostsControls;
             // $controls = $postControls->createControls($post->postID,$post->postBy,$user_id);
-            echo'<article role="article" data-focusable="true" tabIndex="0" class="post">
-            <div class="feed-post-container row">
-                           <div class="post-content-container">
-                               <div class="user-pic">
-                                   <img src="'.url_for($post->profileImage).'" alt="" class="">
-                               </div>
-                               <div class="user-profile-details">
-                                   <span class="name"><a href="'.url_for($post->username).'">'.$post->firstName.' '.$post->lastName.'</a></span>
-                                   <span class="username">@'.$post->username.'</span>
-                                   <span class="date">'.$this->user->timeAgo($post->postedOn).'</span>
-                               </div>
-                               <div class="post-edit-btn">
-                               '.(($post->postBy===$user_id) ? '<div class="d-wrapper-container">
-                               <div class="d-wrapper">
-                                   <div class="d-content" id="del-content">
-                                       <div class="d-image">
-                                           <button type="button" data-post="'.$post->postID.'" data-postBy="'.$post->postBy.'" data-user="'.$user_id.'" id="delete-post-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messagePromptModal">
-                                            <svg viewBox="0 0 24 24" class="del-icon"><g><path d="M20.746 5.236h-3.75V4.25c0-1.24-1.01-2.25-2.25-2.25h-5.5c-1.24 0-2.25 1.01-2.25 2.25v.986h-3.75c-.414 0-.75.336-.75.75s.336.75.75.75h.368l1.583 13.262c.216 1.193 1.31 2.027 2.658 2.027h8.282c1.35 0 2.442-.834 2.664-2.072l1.577-13.217h.368c.414 0 .75-.336.75-.75s-.335-.75-.75-.75zM8.496 4.25c0-.413.337-.75.75-.75h5.5c.413 0 .75.337.75.75v.986h-7V4.25zm8.822 15.48c-.1.55-.664.795-1.18.795H7.854c-.517 0-1.083-.246-1.175-.75L5.126 6.735h13.74L17.32 19.732z"></path><path d="M10 17.75c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75zm4 0c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75z"></path></g></svg>
-                                         </button>
-                                        </div>
+            //check if status friend only
+            if($post->postPrivacy == 1){
+
+                if($this->friend->is_already_friends($user_id, $post->postBy)){
+                    echo'<article role="article" data-focusable="true" tabIndex="0" class="post">
+                    <div class="feed-post-container row">
+                                   <div class="post-content-container">
+                                       <div class="user-pic">
+                                           <img src="'.url_for($post->profileImage).'" alt="" class="">
+                                       </div>
+                                       <div class="user-profile-details">
+                                           <span class="name"><a href="'.url_for($post->username).'">'.$post->firstName.' '.$post->lastName.'</a></span>
+                                           <span class="username">@'.$post->username.'</span>
+                                           <span class="date">'.$this->user->timeAgo($post->postedOn).'</span>
+                                       </div>
+                                       <div class="post-edit-btn">
+                                       '.(($post->postBy===$user_id) ? 
+                                       '<div class="d-wrapper-container">
+                                       <div class="d-wrapper">
+                                           <div class="d-content" id="del-content">
+                                               <div class="d-image">
+                                                   <button type="button" data-post="'.$post->postID.'" data-postBy="'.$post->postBy.'" data-user="'.$user_id.'" id="delete-post-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messagePromptModal">
+                                                    <svg viewBox="0 0 24 24" class="del-icon"><g><path d="M20.746 5.236h-3.75V4.25c0-1.24-1.01-2.25-2.25-2.25h-5.5c-1.24 0-2.25 1.01-2.25 2.25v.986h-3.75c-.414 0-.75.336-.75.75s.336.75.75.75h.368l1.583 13.262c.216 1.193 1.31 2.027 2.658 2.027h8.282c1.35 0 2.442-.834 2.664-2.072l1.577-13.217h.368c.414 0 .75-.336.75-.75s-.335-.75-.75-.75zM8.496 4.25c0-.413.337-.75.75-.75h5.5c.413 0 .75.337.75.75v.986h-7V4.25zm8.822 15.48c-.1.55-.664.795-1.18.795H7.854c-.517 0-1.083-.246-1.175-.75L5.126 6.735h13.74L17.32 19.732z"></path><path d="M10 17.75c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75zm4 0c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75z"></path></g></svg>
+                                                 </button>
+                                                </div>
+                                           </div>
+                                       </div>
+                                   </div>' : '').'
+                                       </div>
+                                   </div>
+                                   <div class="user-post row">
+                                       <article>'.$post->status.'</article>
                                    </div>
                                </div>
-                           </div>' : '').'
+                    </article> ';
+                }
+
+            }else{
+                echo'<article role="article" data-focusable="true" tabIndex="0" class="post">
+                <div class="feed-post-container row">
+                               <div class="post-content-container">
+                                   <div class="user-pic">
+                                       <img src="'.url_for($post->profileImage).'" alt="" class="">
+                                   </div>
+                                   <div class="user-profile-details">
+                                       <span class="name"><a href="'.url_for($post->username).'">'.$post->firstName.' '.$post->lastName.'</a></span>
+                                       <span class="username">@'.$post->username.'</span>
+                                       <span class="date">'.$this->user->timeAgo($post->postedOn).'</span>
+                                   </div>
+                                   <div class="post-edit-btn">
+                                   '.(($post->postBy===$user_id) ? 
+                                   '<div class="d-wrapper-container">
+                                   <div class="d-wrapper">
+                                       <div class="d-content" id="del-content">
+                                           <div class="d-image">
+                                               <button type="button" data-post="'.$post->postID.'" data-postBy="'.$post->postBy.'" data-user="'.$user_id.'" id="delete-post-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messagePromptModal">
+                                                <svg viewBox="0 0 24 24" class="del-icon"><g><path d="M20.746 5.236h-3.75V4.25c0-1.24-1.01-2.25-2.25-2.25h-5.5c-1.24 0-2.25 1.01-2.25 2.25v.986h-3.75c-.414 0-.75.336-.75.75s.336.75.75.75h.368l1.583 13.262c.216 1.193 1.31 2.027 2.658 2.027h8.282c1.35 0 2.442-.834 2.664-2.072l1.577-13.217h.368c.414 0 .75-.336.75-.75s-.335-.75-.75-.75zM8.496 4.25c0-.413.337-.75.75-.75h5.5c.413 0 .75.337.75.75v.986h-7V4.25zm8.822 15.48c-.1.55-.664.795-1.18.795H7.854c-.517 0-1.083-.246-1.175-.75L5.126 6.735h13.74L17.32 19.732z"></path><path d="M10 17.75c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75zm4 0c.414 0 .75-.336.75-.75v-7c0-.414-.336-.75-.75-.75s-.75.336-.75.75v7c0 .414.336.75.75.75z"></path></g></svg>
+                                             </button>
+                                            </div>
+                                       </div>
+                                   </div>
+                               </div>' : '').'
+                                   </div>
+                               </div>
+                               <div class="user-post row">
+                                   <article>'.$post->status.'</article>
                                </div>
                            </div>
-                           <div class="user-post row">
-                               <article>'.$post->status.'</article>
+                </article> ';
+            }
+            
+           
+        }
+        
+    }
+
+    public function allFriendPosts($user_id,$num){
+        $stmt = $this->pdo->prepare("SELECT * FROM `post` , `users` WHERE `postBy`=`user_id` ORDER BY postedOn DESC LIMIT :num");
+        $stmt->bindParam(":num",$num,PDO::PARAM_INT);
+        $stmt->execute();
+        $posts = $stmt->fetchAll(PDO::FETCH_OBJ);
+        foreach($posts as $post){
+            if($this->friend->is_already_friends($user_id, $post->postBy)){
+                echo'<article role="article" data-focusable="true" tabIndex="0" class="post">
+                <div class="feed-post-container row">
+                               <div class="post-content-container">
+                                   <div class="user-pic">
+                                       <img src="'.url_for($post->profileImage).'" alt="" class="">
+                                   </div>
+                                   <div class="user-profile-details">
+                                       <span class="name"><a href="'.url_for($post->username).'">'.$post->firstName.' '.$post->lastName.'</a></span>
+                                       <span class="username">@'.$post->username.'</span>
+                                       <span class="date">'.$this->user->timeAgo($post->postedOn).'</span>
+                                   </div>
+                               </div>
+                               <div class="user-post row">
+                                   <article>'.$post->status.'</article>
+                               </div>
                            </div>
-                       </div>
-            </article> ';
+                </article> ';
+            }
         }
         
     }

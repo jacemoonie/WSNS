@@ -1,0 +1,64 @@
+#eventprofilePic img {
+    width: 20px;
+    height: 20px;
+  }
+  #eventprofilePic {
+    height: 150px;
+    width: 150px;
+  }
+  .event-pic {
+    height: 50%;
+    width: 50%;
+  }
+  img#editeventprofilePic {
+    height: 100%;
+    width: 100%;
+  }
+  .mb-3.event {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+  }
+  .event {
+    margin: 50px;
+}
+.event-details {
+  height: 80vh;
+  display: flex;
+  /*! flex: 1; */
+  overflow-x: hidden ;
+  overflow-y: auto;
+  flex-direction: column;
+}
+.event-show-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 60vh;
+}
+svg.event-del.del-icon {
+  height: 100%;
+  width: 100%;
+}
+svg.event-del.del-icon:hover {
+  fill:red;
+}
+.event-delete-btn {
+  height: 30px;
+  width: 30px;
+}
+.event-post.container {
+  background-color: #d0defb;
+  margin-bottom: 15px;
+  border: .1rem solid #5f91f2;
+  border-radius: 3px;
+}
+.event-post-content {
+  padding: 30px;
+  overflow-y: auto;
+  height: 200px;
+}
+.messages-list-container {
+  overflow-y: auto;
+  height: 90vh;
+}

@@ -1,8 +1,10 @@
 RewriteEngine On
 
-RewriteRule ^(admin|verification|signup|login|index|home|logout|profile|messages|friend|events|notification|group|dashboard|admin_profile|announcement|users)/?$ $1.php
+RewriteRule ^(admin|verification|signup|login|index|home|logout|profile|messages|friend|events|notification|group|dashboard|admin_profile|announcement|users|events)/?$ $1.php
 RewriteRule ^verification/([a-zA-Z0-9]+)/?$ verification.php?verify=$1
 RewriteRule ^([a-zA-Z0-9]+)/?$ profile.php?username=$1
 RewriteRule ^([a-zA-Z0-9]+)/(following|followers|replies)?$ $2.php?username=$1
 RewriteRule ^messages/([a-zA-Z0-9]+)/?$ messages.php?message=$1
 RewriteRule ^group/([a-zA-Z0-9]+)/?$ group.php?group=$1
+RewriteRule ^events/([a-zA-Z0-9]+)/?$ events.php?event=$1
+

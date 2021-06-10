@@ -35,28 +35,32 @@ $user = $loadFromUser->userData($user_id);
                        </div>
                        <form action="">
                             <div class="post-container-text">
-                                <textarea id="postTextarea" placeholder="What's on your mind?"></textarea>
+                                <textarea id="postTextarea" placeholder="What's on your mind?" required></textarea>
                             </div>
                             <div class="post-submit-btn">
                                 <button type="submit" id="submitPostButton" class="">Post</button>
                             </div>
+                            <div class="friendOnlyPrivacy mb-3">
+                                <input type="checkbox" class="" id="friendOnlyPrivacy">
+                                <label for="friendOnlyPrivacy" class="">Friend only</label> 
+                            </div>
+                             
                        </form>
                    </div>
                </div>
                <div class="home-feed-container row">
                    <div class="home-feed-content">
                        <div class="filter-tab">
-                           <a href="#" class="active show-all-tab">
+                           <a href="" class="active show-all-tab">
                                <span class="">All</span>
                            </a>
-                           <a href="#" class="show-friend-only">
+                           <a href="" class="show-friend-only">
                                <span class="">Friend</span>
                            </a>
                        </div>
-                       <section aria-label="Timeline:Your Home Timeline" class="postContainer">
-                            <?php $loadFromPosts->allPosts($user_id,10)?>
+                       <section aria-label="Timeline:Your Home Timeline" id="postDiv" class="postContainer">
+                       <?php $loadFromPosts->allPosts($user_id,10);?>
                        </section>
-                       <?php include 'backend\modal\deleteModal.php'; ?>
                    </div>
                </div>
            </div>
@@ -64,13 +68,15 @@ $user = $loadFromUser->userData($user_id);
         <?php include 'backend\shared\right-section.php'; ?>
     </div>
 </div>
+<?php include 'backend\modal\deleteModal.php'; ?>
+<?php include 'backend\modal\ErrorMsgModal.php';?>
 <script src="<?php echo url_for('frontend\assets\js\delete.js'); ?>"></script>
 <script src="<?php echo url_for('frontend\assets\js\home.js'); ?>"></script>
 <?php include 'backend\loadJsFiles.php'; ?>
 <script>
     $uid = $(".u-p-id").data("uid");
     $(document).ready(function(){
-       
+
         //LOAD RECENT ANNOUNCEMENT
         function userLoadRecentAnnouncement(){
             
@@ -79,20 +85,38 @@ $user = $loadFromUser->userData($user_id);
                 $('.announcement-post-content').html(data);
             })
         }
+        //LOAD RECENT EVENT
+        function userLoadRecentEvent(){
+            
+            $.post("http://localhost/WSNS/backend/ajax/fetchEventHome.php",function(data){
+                // alert(data);
+                $('.event-post-content').html(data);
+            })
+        }
         //LOAD RECENT POST
         function userLoadRecentPosts(){
-            
-            $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPostsHome:$uid},function(data){
-                // console.log(data);
-                $('.postContainer').html(data);
-            })
+            let offset =10;
+            offset += 10;
+            var activeAll = $(".show-all-tab").hasClass("active");
+            var activeFriend = $(".show-friend-only").hasClass("active");
+            if(activeAll){
+                $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPosts:offset,userId:uid},function(data){   
+                    $(".postContainer").html(data);
+                })
+            }
+            if(activeFriend){
+                $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPostsFriend:offset,userId:uid},function(data){   
+                    $(".postContainer").html(data);
+                })
+            }
         }
 
         //LOAD RECENT EVENT
 
         var loadTimer = setInterval(() => {
+            userLoadRecentEvent();
             userLoadRecentPosts();
             userLoadRecentAnnouncement();
-        }, 1000);
+        }, 5000);
     })
 </script>

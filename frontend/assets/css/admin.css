@@ -113,3 +113,21 @@ width: 100px;
   display: none;
 }
 }
+span.red-dot {
+  height: 10px;
+  width: 10px;
+  display: block;
+  background: red;
+  border-radius: 10px;
+}
+span.green-dot {
+  height: 10px;
+  width: 10px;
+  display: block;
+  background: greenyellow;
+  border-radius: 10px;
+}
+#myDIV {
+  padding: 20px;
+  border: .1rem solid #f4f7f7;
+}

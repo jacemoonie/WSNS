@@ -51,7 +51,7 @@
                     <input type="password" name="epassword2" class="form-control" id="edit-password2" autocomplete="off" >
                 </div>
                 <div class="mb-3">
-                    <input type="checkbox" class="" id="s-password" onclick="showPassword()">
+                    <input type="checkbox" class="" id="s-password-user">
                     <label for="s-password" class="">Show password</label> 
                 </div>
                 <div class="mb-3">

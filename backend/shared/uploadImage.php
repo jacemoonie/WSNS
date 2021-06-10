@@ -22,7 +22,7 @@
       }
 
       if(empty($errors)==true){
-        move_uploaded_file($file_tmp,"frontend/profileImage/".$newfilename.".".$file_ext);
+        move_uploaded_file($file_tmp,"frontend/groupImage/".$newfilename.".".$file_ext);
         echo "Success";
         echo "<script>window.close();</script>";
 
@@ -31,5 +31,7 @@
       else{
          print_r($errors);
       }
+   }else{
+      echo "NOT SET";
    }
 ?>

@@ -278,6 +278,7 @@ span.user-text{
 }
 li.msg-user-name-wrap.activeClass {
   border-right: .2rem solid #d0defb;
+  border-left: .2rem solid #d0defb;
 }
 /* CHAT MESSAGES */
 section.chatMessageContainer{

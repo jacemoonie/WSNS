@@ -30,4 +30,7 @@
   .profile-pic img {
     border-radius: 100px;
   }
+  #postProfileDiv {
+    height: 61vh;
+}
   

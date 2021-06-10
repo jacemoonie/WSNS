@@ -82,10 +82,8 @@ document.title = "'.$pageTitle.'";
                         <span class="description__date"><?php echo date("F Y",$date_joined); ?></span>
                         </span>
                         <div class="followersContainer">
-                            <a href="<?php echo url_for($profileData->username.'/friend'); ?>" class="">
                             <span class="value count-friends"><?php echo $get_frnd_num ; ?></span> 
                             <span class="">Friends</span>
-                            </a>
                         </div>
                     </div>
                     <div class="profileButtonContainer">
@@ -112,14 +110,14 @@ document.title = "'.$pageTitle.'";
                <div class="home-feed-container row">
                    <div class="home-feed-content">
                        <div class="filter-tab">
-                           <a href="" class="show-all-tab">
+                           <a href="" class="show-all-tab active">
                                <span class="">Posts</span>
                            </a>
                            <a href="" class="show-friend-only">
                                <span class="">Photos</span>
                            </a>
                        </div>
-                       <section aria-label="Timeline:Your Home Timeline" class="profile postContainer">
+                       <section aria-label="Timeline:Your Home Timeline" id="postProfileDiv" class="profile postContainer">
                             <?php $loadFromPosts->postsProfile($user_id,$profileId,10)?>
                        </section>
                        <?php include 'backend\modal\deleteModal.php'; ?>

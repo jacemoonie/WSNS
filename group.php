@@ -1,5 +1,5 @@
 <?php $pageTitle="Group | WeLink";
-include_once 'backend\shared\main_header_functionality.php';
+include 'backend\shared\main_header_functionality.php';
 
 if(!isset($_GET['group'])){
     $groupId = "";
@@ -58,7 +58,20 @@ if(!isset($_GET['group'])){
                             <span class="chat-header-description"> 
                             <?php echo $groupData->groupDescription; ?>
                             </span>
-                        </div>
+                            <div class="username-container">Members : 
+                            <?php $members = $loadFromGroup->groupMembers($groupId);
+                                foreach($members as $member){
+                                    $userData = $loadFromUser->userData($member->user_id);
+                                    if($user_id!=$userData->user_id){
+                                        echo ' <span class="chat-header-description"> @'.$userData->username.'</span>';
+                                    }else{
+                                        echo ' <span class="chat-header-description">@You</span>';
+                                    }
+                                }
+                            ?>
+                            </div>
+                            </div>
+                            
                         <?php if($groupData->groupCreatedBy == $user_id) {?>
                         <div class="group-edit-btn group">
                             <button data-editgroupdata ="<?php echo $groupId; ?>" data-userid ="<?php echo $user_id; ?>"  class="edit-group-btn" data-bs-toggle="modal" data-bs-target="#editGroupModal">

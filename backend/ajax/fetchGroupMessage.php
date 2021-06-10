@@ -9,50 +9,56 @@ if(is_post_request()){
         $selectedGroupID = h($_POST['LoadgroupId']);
 
         $allJoinedGroup = $loadFromGroup->listGroup($userid);
-         
+
+        if(!empty($allJoinedGroup)){
         // var_dump($allJoinedGroup);
-        foreach($allJoinedGroup as $group){
-            $groupData = $loadFromGroup->groupDataByID($group->group_id);
-            $allGroupMsg = $loadFromGroupMessage->allMessageInGroup($group->group_id);
-            if($allGroupMsg){
-                $lastMessage = end($allGroupMsg);
-                $message = $lastMessage->groupMessage;
-                $messageOn = $lastMessage->groupMessageOn;
-                $messageFrom = $lastMessage->groupMsgFrom;
-                $userData = $loadFromUser->userData($messageFrom);
-                $messageFromName = $userData->firstName.' '.$userData->lastName;
-            }else{
-                $message = "Nobody start talking yet";
-                $messageOn = $groupData->groupCreatedAt;
-                $messageFrom = "";
-                $messageFromName = "";
-            }
-            $activeclass = ($groupData->groupID == $selectedGroupID) ? "activeClass" : "";
-            echo ' 
-            <li class="msg-user-name-wrap '.$activeclass.'"  data-groupID="'.$groupData->groupID.'">
-                <div class="msg-user-name-wrapper">
-                    <div class="ms-user-photo">
-                        <img src="'.url_for($groupData->groupImage).'" alt="'.$groupData->groupName.'" class="">
-                    </div>
-                    <div class="msg-user-name-text">
-                        <div class="msg-user-new">
-                            <div class="msg-user-name">
-                                <h3 class="">'.$groupData->groupName.'</h3>
-                                <span>ID : '.$groupData->groupID.'</span>
-                            </div>
-                            <div class="msg-user-text">
-                                <div class="msg-previ">
-                                <span>'.$messageFromName.' : '.$message.'
+            foreach($allJoinedGroup as $group){
+                $groupData = $loadFromGroup->groupDataByID($group->group_id);
+                $allGroupMsg = $loadFromGroupMessage->allMessageInGroup($group->group_id);
+                if($allGroupMsg){
+                    $lastMessage = end($allGroupMsg);
+                    $message = $lastMessage->groupMessage;
+                    $messageOn = $lastMessage->groupMessageOn;
+                    $messageFrom = $lastMessage->groupMsgFrom;
+                    $userData = $loadFromUser->userData($messageFrom);
+                    $messageFromName = $userData->firstName.' '.$userData->lastName;
+                }else{
+                    $message = "Nobody start talking yet";
+                    $messageOn = $groupData->groupCreatedAt;
+                    $messageFrom = "";
+                    $messageFromName = "";
+                }
+                $activeclass = ($groupData->groupID == $selectedGroupID) ? "activeClass" : "";
+                echo ' 
+                <li class="msg-user-name-wrap '.$activeclass.'"  data-groupID="'.$groupData->groupID.'">
+                    <div class="msg-user-name-wrapper">
+                        <div class="ms-user-photo">
+                            <img src="'.url_for($groupData->groupImage).'" alt="'.$groupData->groupName.'" class="">
+                        </div>
+                        <div class="msg-user-name-text">
+                            <div class="msg-user-new">
+                                <div class="msg-user-name">
+                                    <h3 class="">'.$groupData->groupName.'</h3>
+                                    <span>ID : '.$groupData->groupID.'</span>
+                                </div>
+                                <div class="msg-user-text">
+                                    <div class="msg-previ">
+                                    <span>'.$messageFromName.' : '.$message.'
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="msg-date-wrapper">
-                            <div class="msg-date">'.$loadFromUser->timeAgo($messageOn).'</div>
+                            <div class="msg-date-wrapper">
+                                <div class="msg-date">'.$loadFromUser->timeAgo($messageOn).'</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>';
+                </li>';
+            }
+        }else{
+            echo '<div class ="nogroup">No group joined or created yet.</div>';
         }
+         
+        
     }
 
     // FETCH CHAT MESSAGES

@@ -156,3 +156,13 @@ border-radius: 5px;
   width: 100px;
   height: 100px;
 }
+.friendOnlyPrivacy.mb-3 {
+  margin: 19px;
+      margin-bottom: 19px;
+  font-size: 1.3rem;
+}
+.postContainer {
+  overflow-y: scroll;
+  height: 46vh;
+  padding: 10px;
+}

@@ -68,7 +68,7 @@ $get_all_friends = $loadFromFriend->get_all_friends($_SESSION['userLoggedIn'], t
                                     </div>
                                     <div class="user-friend-request-btn">
                                     <span class="view-profile"><a class="Button" href="'.url_for($requestData->username).'">View profile</a></span>
-                                    <span class="view-profile"><a class="Button" href="">Message</a></span>
+                                    <span class="view-profile"><a class="Button" href="messages/'.$requestData->user_id.'">Message</a></span>
                                     </div>
                                 </div>';
                             }

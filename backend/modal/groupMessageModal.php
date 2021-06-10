@@ -34,22 +34,24 @@
 <!-- New group Modal -->
 <div class="modal fade" id="groupDetailModal" tabindex="-1" aria-labelledby="groupDetailModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content message">
+    <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="groupDetailModalLabel">Group details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" class="" role="search" aria-label="Search people">
+        <form action="" class="" role="search" aria-label="Search people" enctype="multipart/form-data">
             <div class="create-group-wrapper">
               <input type="hidden" name="groupCreatedBy" id="groupCreatedBy" value="<?php echo $user_id ?>">
                 <div class="mb-3">
+                <span class="err-msg" style="display:none;" id="err-msg-gname"></span>
                     <label for="groupName" class="form-label">Group name</label>
-                    <input type="text" name="groupName" class="form-control" id="groupName" placeholder="">
-                </div>
+                    <input type="text" name="groupName" class="form-control" id="groupName" placeholder="" required>
+                </div>  
                 <div class="mb-3">
+                <span class="err-msg"  style="display:none;" id="err-msg-gdesc"></span>
                     <label for="groupDescription" class="form-label">Group description</label>
-                    <textarea class="form-control" name="groupDescription" id="groupDescription" rows="3"></textarea>
+                    <textarea class="form-control" name="groupDescription" id="groupDescription" rows="3"required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="groupDescription" class="form-label">Group members</label>

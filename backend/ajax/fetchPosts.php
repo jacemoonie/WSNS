@@ -8,6 +8,12 @@ if(is_post_request()){
         // echo $limit;
         $loadFromPosts->allPosts($userid,$limit);
     }
+    if(isset($_POST['fetchPostsFriend']) && !empty($_POST['fetchPostsFriend'])){
+        $userid = h($_POST['userId']);
+        $limit = (int)trim($_POST['fetchPostsFriend']);
+        // echo $limit;
+        $loadFromPosts->allFriendPosts($userid,$limit);
+    }
     
     if(isset($_POST['fetchPostsProfile']) && !empty($_POST['fetchPostsProfile'])){
         $userid = h($_POST['userId']);
@@ -24,20 +30,17 @@ if(is_post_request()){
         $admin->recentPosts($limit);
     }
 
-    if(isset($_POST['fetchPostsHome']) && !empty($_POST['fetchPostsHome'])){
-        $userid = h($_POST['fetchPostsHome']);
+    if(isset($_POST['fetchPostAll']) && !empty($_POST['fetchPostAll'])){
+        $userid = h($_POST['fetchPostAll']);
         $loadFromPosts->allPosts($userid,10);
     }
 
-    if(isset($_POST['fetchPostsHomeFriendOnly']) && !empty($_POST['fetchPostsHomeFriendOnly'])){
-        $userid = h($_POST['fetchPostsHomeFriendOnly']);
-        //Check friend
-        $friendPost = $loadFromFriend->get_all_friends($userid, true);
-        if($friendPost){
-           var_dump($friendPost);
-        }
-        // $loadFromPosts->allPosts($userid,10);
+    if(isset($_POST['fetchPostFriend']) && !empty($_POST['fetchPostFriend'])){
+        $userid = h($_POST['fetchPostFriend']);
+        $loadFromPosts->allFriendPosts($userid,50);
     }
+
+    
     
 }
 

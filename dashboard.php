@@ -27,8 +27,10 @@ $user = $admin->adminData($user_id);
                <div class="statistic row">
                 <div class="statistic-content container">
                     <div class="user-online col">
-                        <h3 class="">Users Online</h3>
+                        <div class="online-wrapper">
+                            <h3 class="">Users Online</h3><span class="green-dot"></span>
                         <span class="user-online-counter"><?php echo $loadFromUser->userOnline();?></span>
+                    </div>
                     </div>
                     <div class="websites-views col">
                         <h3 class="websites-view">Sites views</h3>

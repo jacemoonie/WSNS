@@ -20,7 +20,7 @@
                             </div>
                             <div class="user-friend-request-btn">
                             <span class="view-profile"><a class="Button" href="'.url_for($requestData->username).'">View profile</a></span>
-                            <span class="accept-request"><a href="'.url_for(h($_SERVER['PHP_SELF']).'?action=accept_req&id='.$requestData->user_id.'').'" class="req_actionBtn Button acceptRequest">Accept</a></span>
+                            <span class="accept-request"><a href="'.h($_SERVER['PHP_SELF']).'?action=accept_req&id='.$requestData->user_id.'" class="req_actionBtn Button acceptRequest">Accept</a></span>
                             </div>
                         </div>';
                     }
@@ -32,16 +32,3 @@
         </div>
     </div>
 </div>
-<script>
-
-    $(document).ready(function() {
-
-        $notiCounter = $(".profile-user-container").data("counter");
-
-        if($notiCounter!= ""){
-            document.getElementById("noti-counter").innerHTML = $notiCounter;
-        }
-        
-    });
-
-</script>'

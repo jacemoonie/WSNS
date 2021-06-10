@@ -78,15 +78,33 @@ font-size: 1.2rem;
 font-weight: 800;
 }
 .chat-header-name-wrapper.group {
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
 }
 #edit-err-msg {
   margin: 10px;
   color: red;
   font-size: 1.2rem;
+}
+.group-participant-list {
+  display: flex;
+  flex-wrap: wrap;
   }
-  .group-participant-list {
-    display: flex;
-    flex-wrap: wrap;
-    }
+
+  .nogroup {
+      font-size: 1.5rem;
+  }
+  .notfound {
+    font-size: 1.5rem;
+}
+span.err-msg {
+  margin: 10px;
+  color: red;
+  font-size: 1.2rem;
+}
+.username-container {
+  display: flex;
+  flex: 1;
+  flex-wrap:wrap ;
+}

@@ -57,7 +57,7 @@ $(function(){
     $(document).on("click",".cancel-participant",function(e){
         // console.log("IMCLICCKED");
         $userid = $(this).data('uid');
-        console.log($userid);
+        // console.log($userid);
         $(e.target).parent().remove();
         //REMOVE ID 
         const index = groupParticipant.indexOf($userid);
@@ -94,14 +94,26 @@ $(function(){
             // console.log(groupCreatedBy);
             // console.log(groupName);
             // console.log(groupMembers);
-            $.post("http://localhost/WSNS/backend/ajax/createGroup.php",{groupCreatedBy:groupCreatedBy,groupName:groupName,groupDescription:groupDescription,groupMembers:groupMembers},function(data){      
-                var groupId = data;   
-                console.log(data);
-                // //REDIRECT TO MESSAGE PAGE
-                if(groupId !="" && groupId != undefined){
-                    window.location.href = "http://localhost/WSNS/group/"+groupId;
-                }  
-            })
+            if(groupName ==""){
+                document.getElementById("err-msg-gname").innerHTML = "Group name is empty";
+                document.getElementById("err-msg-gname").style.display = "block";
+                if(groupDescription == ""){
+                    document.getElementById("err-msg-gdesc").innerHTML = "Group description is empty";
+                    document.getElementById("err-msg-gdesc").style.display = "block";
+                }         
+            }  
+            
+            if(groupName!="" && groupDescription!=""){
+
+                $.post("http://localhost/WSNS/backend/ajax/createGroup.php",{groupCreatedBy:groupCreatedBy,groupName:groupName,groupDescription:groupDescription,groupMembers:groupMembers},function(data){      
+                    var groupId = data;   
+                    console.log(data);
+                    // //REDIRECT TO MESSAGE PAGE
+                    if(groupId !="" && groupId != undefined){
+                        window.location.href = "http://localhost/WSNS/group/"+groupId;
+                    }  
+                })
+            }
             
         })
 

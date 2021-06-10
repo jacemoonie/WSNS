@@ -3,14 +3,14 @@ $(function(){
     //DELETE USER
     $(document).on("click","#delete-user",function(){
         let userId = $(this).data('uid');
-        // $("#messagePromptModal").modal("show");
-        alert(userId);
-        // $(document).on("click","#confirmDelete",function(){
-        //     $.post("http://localhost/WSNS/backend/ajax/deleteUser.php",{userId:userId},function(data){   
-        //             alert(data);
-        //             // $(".announcement-list").html(data);
-        //     })
-        // }) 
+        $("#messagePromptModal").modal("show");
+        // alert(userId);
+        $(document).on("click","#confirmDelete",function(){
+            $.post("http://localhost/WSNS/backend/ajax/deleteUser.php",{userId:userId},function(data){   
+                    console.log(data);
+                    // window.location.reload(true);
+            })
+        }) 
     })
 
     //EDIT USER

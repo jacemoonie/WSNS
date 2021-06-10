@@ -18,7 +18,7 @@ if(is_post_request()){
 
     if(isset($_POST['verifyCode'])){
 
-        echo $_POST['verifyCode'];
+        $_POST['verifyCode'];
         $code = FormSanitizer::formSanitizerString($_POST['verifyCode']); 
         $verifyCode = $verify->verifyCode("*",$code);
         if($verifyCode){
@@ -28,9 +28,9 @@ if(is_post_request()){
                 $loadFromUser->update("verification",$user_id,array("code"=>$code,"status"=>1));
                 redirect_to(url_for("home"));
           }
-      }else{
-        $errors['verify'] = "Invalid verification code";  
-      }
+        }else{
+            $errors['verify'] = "Invalid verification code";  
+        }
     }
 
 }else{
