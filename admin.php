@@ -35,7 +35,7 @@ if(is_post_request()){
                 <img src="frontend\assets\images\link-icon.svg" alt="" class="">
             </div>
             <div class="login-header row">
-                <h2 class="">Log in to WeLink</h2>
+                <h2 class="">WeLink Admin Log in</h2>
             </div>
             <div class="login-form row">
                 <form class="loginForm" action="<?php echo h($_SERVER['PHP_SELF']);?>" method="POST" >
@@ -50,7 +50,7 @@ if(is_post_request()){
                         <input type="password" name="password" class="form-control" id="password" autocomplete="off" required>
                     </div>
                     <div class="mb-3">
-                        <input type="checkbox" class="" id="s-password" onclick="showPassword()">
+                        <input type="checkbox" class="" id="s-password" onclick="showLoginPassword()">
                         <label for="s-password" class="">Show password</label> 
                     </div>
                     <div class="log-in-btn row">

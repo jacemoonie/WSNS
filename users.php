@@ -54,7 +54,6 @@ if(isset($_SESSION['adminLoggedIn'])){
                                 <tbody class="user">
                                     <?php $loadFromUser->allUserData();?>
                                     <?php include 'backend\modal\editUser.php'; ?>
-                                    <?php include 'backend\modal\deleteModal.php'; ?>
                                 </tbody>
                             </table>
                             <div id="container" style="display:none;">

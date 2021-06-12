@@ -135,7 +135,7 @@ class User{
             '.(($user->userStatus ==0) ? 
             '<td class ="status"><span>Offline</span><span class="red-dot"></span></td>' : '').'
              <td>
-                <button id="edit-user" data-uid="'.$user->user_id.'" data-bs-toggle="modal" data-bs-target="#editUserModal"><img src="'.url_for('frontend\assets\images\settings.svg').'" class="user-settings" title="Settings" data-toggle="tooltip"></button>
+                <button id="edit-user" data-uid="'.$user->user_id.'" data-bs-toggle="modal" data-bs-target="#editUserModal">Edit</button>
             </td>
         </tr>';
 
@@ -376,63 +376,7 @@ class User{
         }
     }
 
-    public function cropProfileImageUpload($file,$user_id){
-        $fileInfo = getImageSize($file['tmp_name']);
-        // var_dump($fileInfo);
-        $fileTmp = $file['tmp_name'];
-        $fileName = $file['name'];
-        $fileType = $file['type'];
-        $fileSize = $file['size'];
-        $fileError = $file['error'];
-
-        $ext = explode('/',$fileType);
-        $ext = strtolower(end($ext));
-        // var_dump($ext);
-        $allowed = array('image/png','image/jpeg','image/jpg');
-       
-        if(in_array($fileInfo['mime'],$allowed)){
-            $path_directory = $_SERVER['DOCUMENT_ROOT']."/welink/frontend/profileImage/".$userId."/";
-            if(!file_exists($path_directory) && !is_dir($path_directory)){
-                mkdir($path_directory,0777,true);
-            }
-            $folder = "frontend/profileImage/".$userId."/".substr(md5(time().mt_rand()),2,25).".".$ext;
-            $path_files = $_SERVER['DOCUMENT_ROOT']."/welink/".$folder;
-            if($fileError === 0){
-                move_uploaded_file($fileTmp,$path_files);
-                 return $folder;
-            }
-        }
-        
-    }
-
-    public function cropCoverImageUpload($file,$user_id){
-        $fileInfo = getImageSize($file['tmp_name']);
-        // var_dump($fileInfo);
-        $fileTmp = $file['tmp_name'];
-        $fileName = $file['name'];
-        $fileType = $file['type'];
-        $fileSize = $file['size'];
-        $fileError = $file['error'];
-
-        $ext = explode('/',$fileType);
-        $ext = strtolower(end($ext));
-        // var_dump($ext);
-        $allowed = array('image/png','image/jpeg','image/jpg');
-       
-        if(in_array($fileInfo['mime'],$allowed)){
-            $path_directory = $_SERVER['DOCUMENT_ROOT']."/welink/frontend/profileCover/".$userId."/";
-            if(!file_exists($path_directory) && !is_dir($path_directory)){
-                mkdir($path_directory,0777,true);
-            }
-            $folder = "frontend/profileCover/".$userId."/".substr(md5(time().mt_rand()),2,25).".".$ext;
-            $path_files = $_SERVER['DOCUMENT_ROOT']."/welink/".$folder;
-            if($fileError === 0){
-                move_uploaded_file($fileTmp,$path_files);
-                 return $folder;
-            }
-        }
-        
-    }
+   
     
 
 }

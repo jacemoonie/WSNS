@@ -48,7 +48,7 @@
                     <?php echo $account->getError(Constants::$passwordTooShort); ?>
                     <?php echo $account->getError(Constants::$passwordAlphaNumeric); ?>
                     <label for="password" class="col-form-label">New password</label>
-                    <input type="password" name="password" class="form-control" id="password" autocomplete="off" >
+                    <input type="password" name="password" class="form-control" id="password1" autocomplete="off" >
                 </div>
                 <div class="mb-3">
                     <label for="password2" class="col-form-label">Confirm new password</label>

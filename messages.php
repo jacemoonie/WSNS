@@ -36,7 +36,7 @@ if(!isset($_GET['message'])){
                 <div class="n-msg-wrapper">
                     <h2 class="">You don't have a message selected</h2>
                     <p class="">Choose one from your existing messages or start a new one.</p>
-                    <a href="<?php echo url_for("messages/compose") ?>" class="n-msg Button" role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#newMessageModal">New messages</a>
+                    <a href="<?php echo url_for("messages/compose") ?>" class="n-msg Button" role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#newMessageModal">New message</a>
                     <?php include 'backend\modal\messageModal.php' ?>
                 </div>
             </div>
