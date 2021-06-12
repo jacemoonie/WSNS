@@ -6,11 +6,12 @@ if(!isset($_GET['message'])){
 }else{
     $otheruserid = h($_GET['message']);
     $otheruserData = $loadFromUser->userData($otheruserid);
-    if(empty($otheruserData)){
+    if(empty($otheruserData) || $otheruserid==$user_id){
         redirect_to(url_for("home"));
     }
 
 }
+
 ?>
 <div class="u-p-id" data-uid="<?php echo $user_id ?>"></div>
 <div class="container-fluid homepage">

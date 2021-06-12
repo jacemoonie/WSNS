@@ -102,7 +102,7 @@ height: 100px;
 }
 .table-responsive {
 overflow-y: auto;
-height: 90vh;
+height: 80vh;
 }
 img#editprofilePic {
 height: 100px;
@@ -130,4 +130,8 @@ span.green-dot {
 #myDIV {
   padding: 20px;
   border: .1rem solid #f4f7f7;
+  height: 50vh;
+}
+.announce-header.container a {
+  margin-left: 15px;
 }

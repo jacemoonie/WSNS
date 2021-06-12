@@ -19,13 +19,12 @@ include(__ROOT__.'\backend\classes\SMTP.php');
 spl_autoload_register(function($class){
     require_once(__ROOT__."/backend/classes/$class.php"); 
 });
-//Declare instance
 
+//Declare instance
 $account= new Account;
 $loadFromUser = new User;
 $verify = new Verify;
 $loadFromPosts = new Posts;
-// $postsControl = new PostsControls;
 $loadFromProfile = new Profile;
 $loadFromFriend = new Friend;
 $loadFromMessage = new Message;
@@ -34,6 +33,7 @@ $admin = new Admin;
 $announce = new Announcement;
 $loadFromGroupMessage = new GroupMessage;
 $loadFromEvent = new Event;
+$loadFromNotification = new Notification;
 
 require_once(__ROOT__.'\backend\shared\functions.php'); 
 // require_once(__ROOT__.'\backend\shared\header.php');

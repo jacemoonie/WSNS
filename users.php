@@ -29,17 +29,17 @@ if(isset($_SESSION['adminLoggedIn'])){
                    <?php include 'backend\modal\createUser.php'; ?>
                   
                </div>
+               <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <input id="pdf-button" class="Button" type="button" value="Download PDF" />					
+                        </div>
+                    </div>
+                </div>
                <div class="users-list" id="users-list">
                <div class="container-xl">
                     <div class="table-responsive">
                         <div class="table-wrapper">
-                            <div class="table-title">
-                                <div class="row">
-                                    <div class="col-sm-7">
-                                        <input id="pdf-button" class="Button" type="button" value="Download PDF" />					
-                                    </div>
-                                </div>
-                            </div>
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
@@ -51,7 +51,7 @@ if(isset($_SESSION['adminLoggedIn'])){
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="user">
                                     <?php $loadFromUser->allUserData();?>
                                     <?php include 'backend\modal\editUser.php'; ?>
                                     <?php include 'backend\modal\deleteModal.php'; ?>

@@ -40,16 +40,25 @@ $user = $admin->adminData($user_id);
                </div>
                <div class="recent-user row">
                 <div class="recent col"><h3 class="">Recent Users activity</h3></div>
-                <div class="recent container" id="myDIV">
-                    <section aria-label="Timeline:Your Home Timeline" class="postContainer">
-                        <?php $admin->recentPosts(10);?>
-                    </section>
-                </div>
-                    
+                <div class="home-feed-container row">
+                   <div class="home-feed-content">
+                       <div class="filter-tab">
+                           <a href="" class="active show-posts-tab">
+                               <span class="">Posts</span>
+                           </a>
+                           <a href="" class="show-event-only">
+                               <span class="">Events</span>
+                           </a>
+                       </div>
+                       <section aria-label="Timeline:Your Home Timeline" id="myDIV" class="postContainer">
+                       <?php $loadFromPosts->allPosts($user_id,10);?>
+                       </section>
+                   </div>
+               </div>
                </div>
            </div>
         </div>
     </div>
 </div>
-
+<script src="<?php echo url_for('frontend\assets\js\admin.js'); ?>"></script>
 <?php include 'backend\loadJsFiles.php'; ?>

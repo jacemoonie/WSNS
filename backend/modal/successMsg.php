@@ -44,3 +44,18 @@
     </div>
   </div>
 </div>
+<!-- Success send request  -->
+<div class="modal fade delete" id="sendFriendRequest" tabindex="-1" aria-labelledby="sendFriendRequestLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm errMsg">
+    <div class="modal-content delete">
+      <div class="modal-header delete">
+        <h5 class="modal-title delete" id="sendFriendRequestLabel">Events</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body delete">
+      successfully sent friend request.
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,7 @@ class Friend{
     public function __construct(){
         $this->db=Database::instance();
         $this->user= new User;
+        $this->noti= new Notification;
         
     }
 
@@ -103,6 +104,7 @@ class Friend{
             $sql = "INSERT INTO `friend_request`(sender, receiver) VALUES(?,?)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$my_id, $user_id]);
+            $noti = $this->user->create("notification",array("notificationFor"=>$user_id,"notificationFrom"=>$my_id,"type"=>"friend","notificationCount"=>"0","status"=>"0"));
             header('Location:'.$userData->username);
             exit;
         }
@@ -120,7 +122,9 @@ class Friend{
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':my_id',$my_id, PDO::PARAM_INT);
             $stmt->bindValue(':frnd_id', $user_id, PDO::PARAM_INT);
-            $stmt->execute();
+            if($stmt->execute()){
+                $deleteNoti = $this->user->delete("notification",array("notificationFor"=>$user_id,"notificationFrom"=>$my_id,"type"=>"friend"));
+            }
             header('Location:'.$userData->username);
             exit;
         }
@@ -131,7 +135,7 @@ class Friend{
     }
 
     // MAKE FRIENDS
-    public function make_friends($my_id, $user_id){
+    public function make_friends($my_id, $user_id,$notid){
         $userData = $this->user->userData($user_id);
         try{
 
@@ -145,6 +149,10 @@ class Friend{
                 $sql = "INSERT INTO `friends`(user_one, user_two) VALUES(?, ?)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->execute([$my_id, $user_id]);
+                 //Notification
+                $noti = $this->user->create("notification",array("notificationFor"=>$user_id,"notificationFrom"=>$my_id,"type"=>"acceptFriend","notificationCount"=>"0","status"=>"0"));
+                //CHANGE NOTI STATUS
+                $noti = $this->noti->update("notification",$notid,array("status"=>"1"));
                 header('Location:'.$userData->username);
                 exit;
                 

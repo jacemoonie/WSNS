@@ -12,6 +12,8 @@ if(is_post_request()){
         //STORE MESSAGE IN DB
         $loadFromUser->create("messages",array("message"=>$msg,"messageFrom"=>$userid,"messageTo"=>$otherid,"messageOn"=>date('Y-m-d H:i:s')));
     
+        //Notification
+        $noti = $loadFromUser->create("notification",array("notificationFor"=>$otherid,"notificationFrom"=>$userid,"type"=>"message","notificationCount"=>"0","status"=>"0"));
         //DISPLAY MESSAGE
         $messageData = $loadFromMessage->messageData($userid,$otherid);
         if(!empty($messageData)){

@@ -37,14 +37,26 @@ $(function(){
         let content_height =elem.outerHeight();
         let content_y = elem[0].scrollHeight - elem.scrollTop();
 
-        // console.log(content_y + "/"+content_height);
+        console.log(content_y + "/"+content_height);
 
         if ( content_y <= content_height +1)
         {
             // console.log("Bottom");
-            $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPostsAdmin:offset},function(data){   
-                $(".postContainer").html(data);
-            })
+            $eventActive = $(".show-event-only").hasClass("active");
+            $postActive = $(".show-posts-tab").hasClass("active");
+
+            if($postActive){
+                $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchPosts:offset,userId:uid},function(data){   
+                    $(".postContainer").html(data);
+                })
+            }
+
+            if($eventActive){
+                $.post("http://localhost/WSNS/backend/ajax/fetchPosts.php",{fetchEvents:offset,userId:uid},function(data){   
+                    $(".postContainer").html(data);
+                })
+            }
+           
         }
     
     }

@@ -54,6 +54,38 @@ class Event{
 
     }
     
+    public function allEvents($user_id,$num){
+        $stmt = $this->pdo->prepare("SELECT * FROM `events` , `users` WHERE `eventBy`=`user_id` ORDER BY `eventCreatedOn` DESC LIMIT :num");
+        $stmt->bindParam(":num",$num,PDO::PARAM_INT);
+        $stmt->execute();
+        $events = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if($stmt->rowCount() !=0){
+            foreach($events as $event){
+                echo' <li class="msg-user-name-wrap"  data-eventid="'.$event->eventID.'">
+                    <div class="msg-user-name-wrapper">
+                        <div class="msg-user-name-text">
+                            <div class="msg-user-new">
+                                <div class="msg-user-name">
+                                    <h3 class="">'.$event->eventName.'</h3>
+                                    <span>ID : '.$event->eventID.'</span>
+                                </div>
+                                <div class="msg-user-text">
+                                    <div class="msg-previ">
+                                    <span style="font-size:1.3rem;" >'.$event->eventDescription.'</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="msg-date-wrapper">
+                                <div class="msg-date">'.$this->user->timeAgo($event->eventCreatedOn).'</div>
+                            </div>
+                        </div>
+                    </div>
+                </li> ';   
+            }
+        }
+        
+        
+    }
 
     //UPDATE EVENT
     public function update($tableName,$eventID, array $fields)

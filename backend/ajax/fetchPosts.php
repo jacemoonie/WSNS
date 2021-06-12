@@ -8,6 +8,12 @@ if(is_post_request()){
         // echo $limit;
         $loadFromPosts->allPosts($userid,$limit);
     }
+    if(isset($_POST['fetchEvents']) && !empty($_POST['fetchEvents'])){
+        $userid = h($_POST['userId']);
+        $limit = (int)trim($_POST['fetchEvents']);
+        // echo $limit;
+        $loadFromEvent->allEvents($userid,$limit);
+    }
     if(isset($_POST['fetchPostsFriend']) && !empty($_POST['fetchPostsFriend'])){
         $userid = h($_POST['userId']);
         $limit = (int)trim($_POST['fetchPostsFriend']);
@@ -25,9 +31,12 @@ if(is_post_request()){
 
     if(isset($_POST['fetchPostsAdmin']) && !empty($_POST['fetchPostsAdmin'])){
 
-        $limit = (int)trim($_POST['fetchPostsAdmin']);
-        // echo $limit;
-        $admin->recentPosts($limit);
+        $admin->recentPosts(10);
+    }
+
+    if(isset($_POST['fetchEvent']) && !empty($_POST['fetchEvent'])){
+
+        $admin->recentEvent(10);
     }
 
     if(isset($_POST['fetchPostAll']) && !empty($_POST['fetchPostAll'])){

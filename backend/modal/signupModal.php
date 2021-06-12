@@ -47,4 +47,5 @@
         </div>
         </div>
     </div>
-</div>               
+</div>   
+<script src="<?php echo url_for('frontend\assets\js\showPassword.js'); ?>"></script>            

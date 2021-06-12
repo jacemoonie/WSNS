@@ -22,7 +22,7 @@
                                 Notification
                                 </span>
                                 <span id="noti-counter" class="noti-counter">
-                                    0
+                                    <?php echo $loadFromNotification->notiCounter($user_id); ?>
                                 </span>
                             </a>
                             <a href="<?php echo url_for('messages');?>">

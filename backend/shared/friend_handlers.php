@@ -4,13 +4,15 @@ if(is_get_request()){
     // IF GET ACTION AND ID PARAMETERS
     if(isset($_GET['action']) && isset($_GET['id'])){
         // ASSIGN TO VARIABLE 
-        $user_id = $_GET['id'];
-        $my_id = $_SESSION['userLoggedIn'];
+        echo $user_id = $_GET['id']; //40
+        echo $my_id = $_SESSION['userLoggedIn']; //43
+        
 
         // IF GET SEND REQUEST ACTION
         if($_GET['action'] == 'send_req'){
 
             $loadFromFriend->make_pending_friends($my_id, $user_id);
+
         }
         // IF GET CANCEL REQUEST OR IGNORE REQUEST ACTION
         else if($_GET['action'] == 'cancel_req' || $_GET['action'] == 'ignore_req'){
@@ -18,8 +20,17 @@ if(is_get_request()){
         }
         // IF GET ACCEPT REQUEST ACTION
         elseif($_GET['action'] == 'accept_req'){
-
-            $loadFromFriend->make_friends($my_id, $user_id);
+            if(isset($_GET['notid'])){
+                $notid = $_GET['notid'];
+                $loadFromFriend->make_friends($my_id, $user_id,$notid);
+            }else{
+                $notiID = $loadFromNotification->getNotidById($user_id,$my_id,'friend');
+                if(!$notiID == false){
+                    $notid = $notiID->ID;
+                    $loadFromFriend->make_friends($my_id, $user_id,$notid);
+                }
+            }
+    
         }
         // IF GET UNFRIEND REQUEST ACTION
         elseif($_GET['action'] == 'unfriend_req'){

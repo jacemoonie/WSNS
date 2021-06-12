@@ -45,4 +45,3 @@ $admin->updateViews();
     
   </body>
 </html>
-<script src="<?php echo url_for('frontend\assets\js\showPassword.js'); ?>"></script>

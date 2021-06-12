@@ -13,6 +13,13 @@ if(is_post_request()){
         $sendmessage = $loadFromUser->create("groupmessage",array("groupMessage"=>$msg,"groupMsgFrom"=>$userid,"groupMsgTo"=>$otherid,"groupMessageOn"=>date('Y-m-d H:i:s')));
         if($sendmessage){
             echo "MESSAGE SENT";
+             //Notification
+             $groupMembers = $loadFromGroup->groupMembers($otherid);
+             foreach($groupMembers as $members){
+                 if($members->user_id!=$userid){
+                    $noti = $loadFromUser->create("notification",array("notificationFor"=>$members->user_id,"notificationFrom"=>$userid,"target"=>$otherid,"type"=>"groupMessage","notificationCount"=>"0","status"=>"0"));
+                 }
+             }
         }
     }
 

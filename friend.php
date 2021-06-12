@@ -1,7 +1,7 @@
 <?php $pageTitle="Friend | WeLink";
 Include_once 'backend\initialize.php'; 
-Include_once 'backend\shared\header.php'; 
-
+Include_once 'backend\shared\header.php';
+ 
 $user_id = $_SESSION['userLoggedIn'];
 $status = $verify->getVerifyStatus("status",$user_id);
 
@@ -15,20 +15,7 @@ if(isset($_SESSION['userLoggedIn']) && $status->status === "1"){
     redirect_to(url_for("index"));
 }
 
-if(is_get_request()){
-
-    if(isset($_GET['username']) && !empty($_GET['username'])){
-      $username = FormSanitizer::formSanitizerString($_GET['username']);
-      $profileID = $loadFromUser->userIdByUsername($username);
-      if(!$profileID){
-          redirect_to(url_for("home")); 
-      }else{
-          $profileId = $profileID;
-      }
-    }else{
-        $profileId = $user_id;
-    }
-}
+include 'backend\shared\friend_handlers.php';
 
 $user = $loadFromUser->userData($user_id);
  // TOTAL REQUESTS
@@ -39,16 +26,17 @@ $get_frnd_num = $loadFromFriend->get_all_friends($_SESSION['userLoggedIn'], fals
 $get_all_friends = $loadFromFriend->get_all_friends($_SESSION['userLoggedIn'], true);
 
 ?>
+<div class="u-p-id" data-uid="<?php echo $user_id ?>"></div>
 <div class="container-fluid homepage">
     <div class="homepage-section row">
         <?php include 'backend\shared\nav-bar.php' ?>
         <div class="mid-section col-sm-6"> 
-           <div class="home-section container">
-            <div class="message-header row">
+           <div class="message-section container">
+               <div class="message-header container">
                    <h2 class="">Friend</h2>
-                   <img src="frontend\assets\images\plus-sign.png" alt="" class="">
-                   <img src="frontend\assets\images\settings.png" alt="" class="notification-setting-icon">
-               </div>
+                   <a href="<?php echo url_for("friend/add-friend") ?>" class="n-friend " role="button" data-focusable="true" data-bs-toggle="modal" data-bs-target="#addFriendModal"><img height="20px" width="20px" src="<?php echo url_for('frontend\assets\images\plus-sign.png');?>" alt="" class=""></a>
+                   <?php include 'backend\modal\friendModal.php'; ?>
+                </div>
                 <div class="messages-list">
                     <h3>All friends</h3>
                     <div class="usersWrapper">
@@ -81,8 +69,9 @@ $get_all_friends = $loadFromFriend->get_all_friends($_SESSION['userLoggedIn'], t
                 </div>
            </div>
         </div>
+
         <?php include 'backend\shared\right-section.php' ?>
     </div>
 </div>
-
 <?php include 'backend\loadJsFiles.php'; ?>
+<script src="<?php echo url_for('frontend\assets\js\friend.js'); ?>"></script>

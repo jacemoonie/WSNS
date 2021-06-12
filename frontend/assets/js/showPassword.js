@@ -1,6 +1,6 @@
 function showPassword(){
     
-    let password= document.getElementById("password");
+    let password= document.getElementById("password1");
     let password2= document.getElementById("password2");
     
     if(password.type==="password" || password2.type==="password"){
